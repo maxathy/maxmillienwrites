@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /author/epilogue
+Disallow: /author/album
+
+Sitemap: https://maxmillienwrites.com/sitemap.xml
