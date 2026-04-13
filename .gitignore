@@ -1,0 +1,12 @@
+node_modules
+dist
+.firebase
+firebase-debug.log
+.env
+.env.*
+!.env.example
+functions/lib
+src/routeTree.gen.ts
+.DS_Store
+*.log
+.vite
