@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Helmet } from 'react-helmet-async'
 import { Container } from '../components/ui/Container'
 import { SEO } from '../components/seo/SEO'
 import {
@@ -24,12 +23,11 @@ function ResumePage() {
         description={`Résumé of ${resume.name}: ${resume.experience[0]?.title} at ${resume.experience[0]?.company}. ${resume.skills[0]?.label} and full-stack architecture.`}
         path="/resume"
       />
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(buildJsonResume(resume))}
-        </script>
-        <style>{PRINT_STYLES}</style>
-      </Helmet>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonResume(resume)) }}
+      />
+      <style dangerouslySetInnerHTML={{ __html: PRINT_STYLES }} />
 
       <main className="resume-page pt-24 pb-[var(--space-16)]">
         <Container>

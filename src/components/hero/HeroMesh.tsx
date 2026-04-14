@@ -1,5 +1,5 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Html, Line } from '@react-three/drei'
+import { Line, Text } from '@react-three/drei'
 import { Suspense, useMemo, useRef, useState } from 'react'
 import { Group, MathUtils, Mesh, Vector3 } from 'three'
 import { prefersReducedMotion } from '../../lib/motion'
@@ -89,28 +89,19 @@ function Node({ def, hovered, setHovered, animate, livePositions }: NodeProps) {
         emissiveIntensity={active ? 0.6 : 0}
         roughness={0.4}
       />
-      <Html
-        center
-        distanceFactor={8}
+      <Text
         position={[0, 0.3, 0]}
-        style={{ pointerEvents: 'none' }}
+        fontSize={0.09}
+        letterSpacing={0.12}
+        color={active ? '#D4FF4F' : '#F5F4F0'}
+        fillOpacity={active ? 1 : 0.55}
+        anchorX="center"
+        anchorY="middle"
+        renderOrder={1}
+        material-depthTest={false}
       >
-        <span
-          style={{
-            fontFamily:
-              'JetBrains Mono Variable, JetBrains Mono, ui-monospace, monospace',
-            fontSize: '10px',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: active ? '#D4FF4F' : '#F5F4F0',
-            opacity: active ? 1 : 0.55,
-            whiteSpace: 'nowrap',
-            transition: 'color 240ms, opacity 240ms',
-          }}
-        >
-          {def.label}
-        </span>
-      </Html>
+        {def.label.toUpperCase()}
+      </Text>
     </mesh>
   )
 }

@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async'
 import { buildMeta } from '../../lib/seo'
 
 type SEOProps = {
@@ -19,7 +18,7 @@ export function SEO({ title, description, path = '/' }: SEOProps) {
   })
 
   return (
-    <Helmet>
+    <>
       <title>{meta.title}</title>
       <meta name="description" content={meta.description} />
       <link rel="canonical" href={meta.canonical} />
@@ -28,6 +27,6 @@ export function SEO({ title, description, path = '/' }: SEOProps) {
       <meta property="og:url" content={meta.canonical} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
-    </Helmet>
+    </>
   )
 }
