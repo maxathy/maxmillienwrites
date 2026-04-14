@@ -26,17 +26,23 @@ export function CalendlyEmbed() {
 
   useEffect(() => {
     if (!visible) return
+    let link: HTMLLinkElement | null = null
+    let script: HTMLScriptElement | null = null
     if (!document.querySelector(`link[href="${WIDGET_CSS}"]`)) {
-      const link = document.createElement('link')
+      link = document.createElement('link')
       link.rel = 'stylesheet'
       link.href = WIDGET_CSS
       document.head.appendChild(link)
     }
     if (!document.querySelector(`script[src="${WIDGET_SRC}"]`)) {
-      const script = document.createElement('script')
+      script = document.createElement('script')
       script.src = WIDGET_SRC
       script.async = true
       document.body.appendChild(script)
+    }
+    return () => {
+      link?.remove()
+      script?.remove()
     }
   }, [visible])
 

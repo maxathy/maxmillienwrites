@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Container } from '../components/ui/Container'
 import { SEO } from '../components/seo/SEO'
@@ -12,9 +13,30 @@ export const Route = createFileRoute('/resume')({
   component: ResumePage,
 })
 
+const JSONLD_ID = 'resume-jsonld'
+const PRINT_STYLE_ID = 'resume-print-styles'
+
 function ResumePage() {
   const currentRoles = resume.experience.filter((r) => r.start || r.end)
   const previousRoles = resume.experience.filter((r) => !r.start && !r.end)
+
+  useEffect(() => {
+    const jsonld = document.createElement('script')
+    jsonld.id = JSONLD_ID
+    jsonld.type = 'application/ld+json'
+    jsonld.textContent = JSON.stringify(buildJsonResume(resume))
+    document.head.appendChild(jsonld)
+
+    const style = document.createElement('style')
+    style.id = PRINT_STYLE_ID
+    style.textContent = PRINT_STYLES
+    document.head.appendChild(style)
+
+    return () => {
+      jsonld.remove()
+      style.remove()
+    }
+  }, [])
 
   return (
     <>
@@ -23,11 +45,6 @@ function ResumePage() {
         description={`Résumé of ${resume.name}: ${resume.experience[0]?.title} at ${resume.experience[0]?.company}. ${resume.skills[0]?.label} and full-stack architecture.`}
         path="/resume"
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildJsonResume(resume)) }}
-      />
-      <style dangerouslySetInnerHTML={{ __html: PRINT_STYLES }} />
 
       <main className="resume-page pt-24 pb-[var(--space-16)]">
         <Container>

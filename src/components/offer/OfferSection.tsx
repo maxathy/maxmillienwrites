@@ -22,31 +22,31 @@ export function OfferSection() {
 
   useEffect(() => {
     if (prefersReducedMotion()) return
-    const mm = gsap.matchMedia()
-    mm.add('(min-width: 768px)', () => {
-      const wrapper = wrapperRef.current
-      const track = trackRef.current
-      if (!wrapper || !track) return
-      const distance = track.scrollWidth - window.innerWidth
-      const tween = gsap.to(track, {
-        x: -distance,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: wrapper,
-          start: 'top top',
-          end: () => `+=${distance}`,
-          pin: true,
-          scrub: 0.6,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
+    const wrapper = wrapperRef.current
+    if (!wrapper) return
+    const ctx = gsap.context(() => {
+      const mm = gsap.matchMedia()
+      mm.add('(min-width: 768px)', () => {
+        const track = trackRef.current
+        if (!track) return
+        const distance = track.scrollWidth - window.innerWidth
+        gsap.to(track, {
+          x: -distance,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrapper,
+            start: 'top top',
+            end: () => `+=${distance}`,
+            pin: true,
+            pinType: 'transform',
+            scrub: 0.6,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        })
       })
-      return () => {
-        tween.scrollTrigger?.kill()
-        tween.kill()
-      }
-    })
-    return () => mm.revert()
+    }, wrapper)
+    return () => ctx.revert()
   }, [])
 
   return (

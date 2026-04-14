@@ -4,6 +4,20 @@ import { Suspense, useMemo, useRef, useState } from 'react'
 import { Group, MathUtils, Mesh, Vector3 } from 'three'
 import { prefersReducedMotion } from '../../lib/motion'
 
+function hasWebGL(): boolean {
+  if (typeof window === 'undefined') return false
+  try {
+    const canvas = document.createElement('canvas')
+    return !!(
+      canvas.getContext('webgl2') ||
+      canvas.getContext('webgl') ||
+      canvas.getContext('experimental-webgl')
+    )
+  } catch {
+    return false
+  }
+}
+
 type NodeDef = {
   id: string
   label: string
@@ -228,7 +242,7 @@ function StaticFallback() {
 
 export function HeroMesh() {
   const reduced = prefersReducedMotion()
-  if (reduced) return <StaticFallback />
+  if (reduced || !hasWebGL()) return <StaticFallback />
   return (
     <div
       aria-hidden
