@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Container } from '../ui/Container'
-import { caseStudies } from '../../content/case-studies'
+import { clientCaseStudies as caseStudies } from '../../content/client-case-studies'
 import { CaseStudyCard } from './CaseStudyCard'
 
 export function CaseStudyRail() {

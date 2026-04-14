@@ -1,12 +1,12 @@
-import type { CaseStudy } from '../../content/case-studies'
+import type { ClientCaseStudy } from '../../content/client-case-studies'
 
-type Props = { study: CaseStudy; index: number }
+type Props = { study: ClientCaseStudy; index: number }
 
 export function CaseStudyCard({ study, index }: Props) {
   const accent = study.accent ?? 'var(--color-accent)'
   return (
     <a
-      href={`/work/${study.slug}`}
+      href={study.detailHref}
       className="rail-card group relative flex shrink-0 snap-start flex-col overflow-hidden rounded-[var(--radius-lg)] border border-white/10 bg-white/[0.02] transition-colors hover:border-white/25"
       style={{
         width: 'clamp(280px, 40vw, 480px)',
@@ -29,11 +29,6 @@ export function CaseStudyCard({ study, index }: Props) {
         />
         <div className="absolute left-6 top-6 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[color:var(--color-fg)]/70">
           <span>Case · {String(index + 1).padStart(2, '0')}</span>
-          {study.status === 'coming-soon' && (
-            <span className="rounded-full border border-white/15 px-2 py-0.5 text-[9px]">
-              Coming soon
-            </span>
-          )}
         </div>
         <div
           className="absolute bottom-6 right-6 h-2 w-2 rounded-full transition-transform duration-500 group-hover:scale-[3]"
