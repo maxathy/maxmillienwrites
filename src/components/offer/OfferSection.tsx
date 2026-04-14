@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { gsap, prefersReducedMotion } from '../../lib/motion'
 
 const TILES = [
@@ -20,7 +20,7 @@ export function OfferSection() {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prefersReducedMotion()) return
     const wrapper = wrapperRef.current
     if (!wrapper) return
@@ -39,6 +39,7 @@ export function OfferSection() {
             end: () => `+=${distance}`,
             pin: true,
             pinType: 'transform',
+            pinReparent: true,
             scrub: 0.6,
             anticipatePin: 1,
             invalidateOnRefresh: true,
