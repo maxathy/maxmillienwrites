@@ -69,6 +69,25 @@ button:focus-visible,
   border-radius: var(--radius-sm);
 }
 
+.hero-vignette {
+  background:
+    radial-gradient(
+      ellipse at 20% 40%,
+      rgba(10, 10, 11, 0.2) 0%,
+      rgba(10, 10, 11, 0.85) 55%,
+      rgba(10, 10, 11, 1) 100%
+    );
+}
+
+.rail-card {
+  transition: transform 500ms var(--ease-out-expo),
+    border-color 300ms var(--ease-out-expo);
+  will-change: transform;
+}
+.rail-card:hover {
+  transform: translateY(-4px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
