@@ -1,20 +1,18 @@
 import { Link } from '@tanstack/react-router'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Container } from '../ui/Container'
 import { NavLink } from './NavLink'
-import { useMagneticHover } from '../../lib/motion'
 
 const LINKS = [
   { to: '/work', label: 'Work' },
   { to: '/stack', label: 'Stack' },
   { to: '/engage', label: 'Engage' },
   { to: '/resume', label: 'Résumé' },
+  { to: '/contact', label: 'Contact' },
 ] as const
 
 export function Nav() {
   const [open, setOpen] = useState(false)
-  const ctaRef = useRef<HTMLAnchorElement>(null)
-  useMagneticHover(ctaRef, 0.25)
 
   useEffect(() => {
     if (!open) return
@@ -44,14 +42,6 @@ export function Nav() {
               {l.label}
             </NavLink>
           ))}
-          <Link
-            ref={ctaRef}
-            to="/engage"
-            hash="book"
-            className="inline-flex items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-4 py-2 text-sm font-semibold text-[color:var(--color-bg)] transition-shadow hover:shadow-[0_0_0_4px_color-mix(in_oklab,var(--color-accent)_20%,transparent)] will-change-transform"
-          >
-            Book a call →
-          </Link>
         </nav>
 
         <button
@@ -83,14 +73,6 @@ export function Nav() {
                 {l.label}
               </Link>
             ))}
-            <Link
-              to="/engage"
-              hash="book"
-              onClick={() => setOpen(false)}
-              className="mt-2 inline-flex w-fit items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-4 py-2 text-sm font-semibold text-[color:var(--color-bg)]"
-            >
-              Book a call →
-            </Link>
           </Container>
         </div>
       )}
