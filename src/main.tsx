@@ -3,8 +3,8 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { HelmetProvider } from 'react-helmet-async'
 import { routeTree } from './routeTree.gen'
-import '@fontsource-variable/inter'
-import '@fontsource-variable/jetbrains-mono'
+import '@fontsource-variable/inter/index.css'
+import '@fontsource-variable/jetbrains-mono/index.css'
 import './styles/globals.css'
 
 const router = createRouter({ routeTree })
