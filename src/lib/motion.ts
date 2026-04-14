@@ -1,4 +1,8 @@
 import { useEffect, type RefObject } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function prefersReducedMotion(): boolean {
   if (typeof window === 'undefined') return false
@@ -50,3 +54,47 @@ export function useMagneticHover(
     }
   }, [ref, strength])
 }
+
+/**
+ * Wraps each text line of `el` in an overflow-clipped span pair so lines can
+ * be translated in/out individually. Call after layout; returns the inner
+ * line spans for animation.
+ */
+export function splitLines(el: HTMLElement): HTMLSpanElement[] {
+  const text = el.textContent ?? ''
+  const words = text.trim().split(/\s+/)
+  el.textContent = ''
+  const measure = document.createElement('span')
+  measure.style.visibility = 'hidden'
+  measure.style.position = 'absolute'
+  el.appendChild(measure)
+
+  const lines: string[][] = [[]]
+  const width = el.clientWidth
+  for (const word of words) {
+    measure.textContent = lines[lines.length - 1].concat(word).join(' ')
+    if (measure.offsetWidth > width && lines[lines.length - 1].length > 0) {
+      lines.push([word])
+    } else {
+      lines[lines.length - 1].push(word)
+    }
+  }
+  el.removeChild(measure)
+
+  const inners: HTMLSpanElement[] = []
+  for (const line of lines) {
+    const outer = document.createElement('span')
+    outer.style.display = 'block'
+    outer.style.overflow = 'hidden'
+    const inner = document.createElement('span')
+    inner.style.display = 'inline-block'
+    inner.style.willChange = 'transform'
+    inner.textContent = line.join(' ') + ' '
+    outer.appendChild(inner)
+    el.appendChild(outer)
+    inners.push(inner)
+  }
+  return inners
+}
+
+export { gsap, ScrollTrigger }
