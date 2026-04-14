@@ -6,9 +6,10 @@ import { useMagneticHover } from '../../lib/motion'
 const TRUST = [
   'PureTome',
   'Quiet Horizons',
+  'SBE Vision',
   'Verizon',
+  'G4S',
   'Partners Health',
-  'Boston University',
 ]
 
 export function HeroCopy() {
