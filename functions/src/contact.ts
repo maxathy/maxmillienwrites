@@ -11,11 +11,18 @@ const ALLOWED_ORIGINS = new Set([
   'http://localhost:5173',
 ])
 
+// Keep in lockstep with shared/contact-schema.ts — Firebase deploys only the
+// functions/ directory, so the canonical schema cannot be imported directly.
 const ContactPayload = z.object({
-  name: z.string().min(1).max(200),
-  email: z.string().email().max(320),
-  message: z.string().min(1).max(5000),
-  company: z.string().max(200).optional(),
+  name: z.string().trim().min(2).max(80),
+  email: z.string().trim().email().max(320),
+  company: z
+    .string()
+    .trim()
+    .max(120)
+    .optional()
+    .or(z.literal('').transform(() => undefined)),
+  message: z.string().trim().min(20).max(4000),
 })
 
 export const contact = onRequest(
