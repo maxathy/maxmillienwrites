@@ -1,7 +1,10 @@
+import { lazy, Suspense } from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { Container } from '../components/ui/Container'
 import { SEO } from '../components/seo/SEO'
-import { StackGrid } from '../components/stack/StackGrid'
+import { StackGraphFallback } from '../components/stack/StackGraphFallback'
+
+const StackGraph = lazy(() => import('../components/stack/StackGraph'))
 
 export const Route = createFileRoute('/stack')({
   component: StackPage,
@@ -25,13 +28,15 @@ function StackPage() {
               What I actually build with
             </h1>
             <p className="mt-6 text-lg text-[color:var(--color-fg)]/80">
-              Five layers, chosen for production behavior rather than résumé bingo. Click any
+              Five layers, chosen for production behavior rather than résumé bingo. Hover any
               primitive for the operator-level note — how I use it, what it&rsquo;s for, and why it
               earned a slot.
             </p>
           </header>
 
-          <StackGrid />
+          <Suspense fallback={<StackGraphFallback />}>
+            <StackGraph />
+          </Suspense>
 
           <section className="mt-[var(--space-12)] max-w-[72ch] border-t border-white/10 pt-[var(--space-8)]">
             <p className="text-[color:var(--color-fg)]/70">
