@@ -6,6 +6,12 @@
   --color-accent: #D4FF4F;
   --color-muted: #4A4A52;
 
+  --color-group-frontend: #A78BFA;
+  --color-group-backend: #60A5FA;
+  --color-group-ai: #D4FF4F;
+  --color-group-infra: #8EE6C8;
+  --color-group-compliance: #F59E0B;
+
   --font-display: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
