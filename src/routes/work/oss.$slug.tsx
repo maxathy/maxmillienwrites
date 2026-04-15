@@ -2,12 +2,14 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { Container } from '../../components/ui/Container'
 import { SEO } from '../../components/seo/SEO'
 import { ossShowcase } from '../../content/oss-showcase'
+import { ossContent } from '../../content/oss'
 
 export const Route = createFileRoute('/work/oss/$slug')({
   loader: ({ params }) => {
     const repo = ossShowcase.find((r) => r.slug === params.slug)
     if (!repo) throw notFound()
-    return { repo }
+    const content = ossContent[params.slug] ?? null
+    return { repo, content }
   },
   component: OssDetailPage,
   notFoundComponent: () => (
@@ -23,7 +25,7 @@ export const Route = createFileRoute('/work/oss/$slug')({
 })
 
 function OssDetailPage() {
-  const { repo } = Route.useLoaderData()
+  const { repo, content } = Route.useLoaderData()
 
   return (
     <>
@@ -77,18 +79,73 @@ function OssDetailPage() {
             </div>
           </header>
 
-          <section className="max-w-[72ch] border-t border-white/10 pt-[var(--space-8)]">
-            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-fg)]/60">
-              Architecture deep-dive
-            </h2>
-            <p className="text-[color:var(--color-fg)]/70">
-              Threat model, design decisions, and the extraction note publish
-              here in the next content pass. The README in the repo is the
-              current source of truth.
-            </p>
-          </section>
+          {content ? (
+            <div className="flex flex-col gap-[var(--space-10)] border-t border-white/10 pt-[var(--space-8)]">
+              <DeepDiveSection label="Problem">{content.problem}</DeepDiveSection>
+
+              <section>
+                <SectionLabel>Architecture</SectionLabel>
+                <div className="mt-[var(--space-4)]">{content.architecture.diagram}</div>
+                <div className="mt-[var(--space-4)] max-w-[72ch] space-y-3 text-[color:var(--color-fg)]/80">
+                  {content.architecture.walkthrough}
+                </div>
+              </section>
+
+              <DeepDiveSection label="Threat model · constraints">
+                {content.threatModel}
+              </DeepDiveSection>
+
+              <DeepDiveSection label="Extraction note">
+                {content.extractionNote}
+              </DeepDiveSection>
+
+              <section className="border-t border-white/10 pt-[var(--space-6)]">
+                <a
+                  href={repo.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[color:var(--color-bg)]"
+                >
+                  Open-source on GitHub →
+                </a>
+              </section>
+            </div>
+          ) : (
+            <section className="max-w-[72ch] border-t border-white/10 pt-[var(--space-8)]">
+              <SectionLabel>Architecture deep-dive</SectionLabel>
+              <p className="mt-4 text-[color:var(--color-fg)]/70">
+                Deep-dive content for this repository is still being finalized. The README in the
+                repo is the current source of truth.
+              </p>
+            </section>
+          )}
         </Container>
       </main>
     </>
+  )
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-fg)]/60">
+      {children}
+    </h2>
+  )
+}
+
+function DeepDiveSection({
+  label,
+  children,
+}: {
+  label: string
+  children: React.ReactNode
+}) {
+  return (
+    <section>
+      <SectionLabel>{label}</SectionLabel>
+      <div className="mt-[var(--space-4)] max-w-[72ch] space-y-3 text-[color:var(--color-fg)]/80">
+        {children}
+      </div>
+    </section>
   )
 }
