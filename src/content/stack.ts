@@ -1,24 +1,3 @@
-export type StackGroup =
-  | 'AI & Data Intelligence'
-  | 'Backend'
-  | 'Frontend'
-  | 'Infrastructure'
-  | 'Compliance & Security'
-
-export type StackEntry = {
-  group: StackGroup
-  name: string
-  note: string
-}
-
-export const stackGroups: StackGroup[] = [
-  'AI & Data Intelligence',
-  'Backend',
-  'Frontend',
-  'Infrastructure',
-  'Compliance & Security',
-]
-
 export type StackGroupKey = 'ai' | 'backend' | 'frontend' | 'infra' | 'compliance'
 
 export type StackNode = {
@@ -267,12 +246,3 @@ export const stackEdges: StackEdge[] = [
   { source: 'mcp', target: 'claude-code', label: 'tool protocol' },
 ]
 
-export const stack: StackEntry[] = stackNodes.map((n) => ({
-  group: stackGroupMeta[n.group].label === 'AI & Data'
-    ? 'AI & Data Intelligence'
-    : stackGroupMeta[n.group].label === 'Compliance'
-      ? 'Compliance & Security'
-      : (stackGroupMeta[n.group].label as StackGroup),
-  name: n.name,
-  note: n.note,
-}))
