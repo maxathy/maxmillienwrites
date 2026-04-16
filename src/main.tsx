@@ -4,6 +4,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { routeTree } from './routeTree.gen'
 import '@fontsource-variable/inter/index.css'
 import '@fontsource-variable/jetbrains-mono/index.css'
+import '@fontsource-variable/fraunces/index.css'
 import './styles/globals.css'
 
 const router = createRouter({ routeTree })

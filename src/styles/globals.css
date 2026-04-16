@@ -15,6 +15,7 @@
   --font-display: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Fraunces Variable", "Fraunces", ui-serif, Georgia, serif;
 
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -92,6 +93,98 @@ button:focus-visible,
 }
 .rail-card:hover {
   transform: translateY(-4px);
+}
+
+.author-surface {
+  --color-bg: #1a1410;
+  --color-fg: #f3ebe0;
+  --color-accent: #c48a5b;
+  --color-muted: #6b5d50;
+
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-serif);
+  line-height: 1.75;
+}
+
+.author-surface h1,
+.author-surface h2,
+.author-surface h3,
+.author-surface h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.author-surface h1 {
+  font-size: clamp(2.75rem, 6.5vw, 4.75rem);
+  font-weight: 400;
+}
+
+.author-surface p {
+  max-width: 64ch;
+}
+
+.author-surface .prose-measure {
+  max-width: 64ch;
+}
+
+.author-surface a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 200ms var(--ease-out-expo);
+}
+
+.author-surface a:hover {
+  color: var(--color-fg);
+}
+
+.author-surface .author-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0;
+  transition: transform 300ms var(--ease-out-expo), background-color 200ms var(--ease-out-expo);
+}
+
+.author-surface .author-cta-primary {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.author-surface .author-cta-primary:hover {
+  background-color: var(--color-fg);
+  transform: translateY(-2px);
+}
+
+.author-surface .author-cta-secondary {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  background: transparent;
+}
+
+.author-surface .author-cta-secondary:hover {
+  color: var(--color-fg);
+  border-color: var(--color-fg);
+  transform: translateY(-2px);
+}
+
+.author-surface .pull-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+  line-height: 1.35;
+  color: var(--color-accent);
+  max-width: 32ch;
 }
 
 @media (prefers-reduced-motion: reduce) {
