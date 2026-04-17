@@ -16,8 +16,8 @@ Operator-grade runbook for deploying `maxmillienwrites.com` to Firebase and reti
 Run from your laptop, not CI:
 
 ```bash
-# Node 20 (matches .nvmrc and the Cloud Functions runtime)
-node --version   # expect v20.x
+# Node 24 (matches .nvmrc and the Cloud Functions runtime)
+node --version   # expect v24.x
 
 # Firebase CLI
 npm install -g firebase-tools

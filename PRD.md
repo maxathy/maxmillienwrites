@@ -235,7 +235,7 @@ A visually distinct page, warmer palette, serif typography, slower pacing. Treat
 - **Error tracking:** Sentry (free tier)
 - **SEO:** react-helmet-async for dynamic meta, static sitemap.xml + robots.txt generated at build
 - **Hosting:** Firebase Hosting (free Spark plan sufficient — static SPA)
-- **Contact form backend:** Firebase Cloud Function (Node 20) → Resend API for email delivery
+- **Contact form backend:** Firebase Cloud Function (Node 24) → Resend API for email delivery
 - **CI/CD:** GitHub Actions → `firebase deploy` on merge to `main`
 - **Domain:** `maxmillienwrites.com` (existing, currently pointed at Carrd — cutover via DNS)
 
