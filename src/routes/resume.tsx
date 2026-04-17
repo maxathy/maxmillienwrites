@@ -148,7 +148,7 @@ function ResumePage() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mb-[var(--space-10)]">
-      <h2 className="mb-[var(--space-4)] font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-accent)]">
+      <h2 className="mt-8 mb-[var(--space-4)] font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-accent)]">
         {title}
       </h2>
       {children}
