@@ -26,7 +26,7 @@ function ContactPage() {
             </h1>
             <p className="mt-6 text-lg text-[color:var(--color-fg)]/80">
               The more context you share up front, the better the first reply. Engagements,
-              architecture reviews, or a specific problem — all land in the same inbox and get a
+              architecture reviews, or a specific problem: all land in the same inbox and get a
               response within 24 hours.
             </p>
           </header>
@@ -35,7 +35,7 @@ function ContactPage() {
             <section aria-labelledby="contact-form-heading">
               <h2
                 id="contact-form-heading"
-                className="mb-[var(--space-4)] font-mono text-[10px] uppercase tracking-[0.25em] text-[color:var(--color-fg)]/60"
+                className="mb-[var(--space-4)] mt-6 font-mono text-[10px] uppercase tracking-[0.25em] text-[color:var(--color-fg)]/60"
               >
                 Send a message
               </h2>
