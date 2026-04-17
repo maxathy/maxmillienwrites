@@ -57,7 +57,7 @@ export const contact = onRequest(
 
     try {
       const result = await resend.emails.send({
-        from: 'contact@maxmillienwrites.com',
+        from: 'info@puretome.com',
         to: 'max.millien@puretome.com',
         replyTo: email,
         subject: `maxmillienwrites.com — inquiry from ${name}`,

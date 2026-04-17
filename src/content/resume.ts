@@ -35,7 +35,7 @@ export const resume: Resume = {
   name: 'Max Millien',
   location: 'Greater Boston Area',
   phone: '(617) 224-7372',
-  email: 'maxmillienjr@gmail.com',
+  email: 'max.millien@puretome.com',
   github: 'github.com/maxathy',
   pdfHref: '/resume/Millien-Max-2026.pdf',
   summary:
