@@ -10,21 +10,21 @@ export const Route = createFileRoute('/engage')({
 
 const DELIVERABLES = [
   {
-    title: 'Week 1 — Audit',
+    title: 'Week 1: Audit',
     body: 'I read your codebase, your incident logs, and your migration docs. You get a written systems map: where the risk lives, where the velocity is being taxed, and where the agentic layer needs to sit.',
   },
   {
-    title: 'Weeks 2–4 — Architecture',
+    title: 'Weeks 2–4: Architecture',
     body: 'Typed contracts, service boundaries, and the orchestration graph. If the AI layer is the objective, we pick the embedding model, the memory topology, and the evaluator loop before writing a line of production code.',
   },
   {
-    title: 'Weeks 5+ — Ship',
+    title: 'Weeks 5+: Ship',
     body: 'I embed with your team, pair on critical paths, and leave behind a monorepo your next hire can onboard to in a day.',
   },
 ]
 
 const TERMS = [
-  { label: 'Engagement', value: 'C2C. 3-month minimum, renewable.' },
+  { label: 'Engagement', value: 'C2C. 2-month minimum, renewable.' },
   { label: 'Rate', value: 'Weekly retainer. Specifics on the call.' },
   { label: 'Availability', value: 'Boston-based, remote-first. One onsite week/quarter if useful.' },
   { label: 'Stack bias', value: 'TypeScript, React/Angular, NestJS, Postgres, GCP. Flexible on everything except the rigor.' },
