@@ -48,18 +48,31 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
   line-height: 1.05;
   font-weight: 600;
 }
 
-h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
-h2 { font-size: clamp(2rem, 4vw, 3rem); }
-h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
 
-code, pre, .font-mono {
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+code,
+pre,
+.font-mono {
   font-family: var(--font-mono);
 }
 
@@ -78,12 +91,10 @@ button:focus-visible,
 
 .hero-vignette {
   background:
-    radial-gradient(
-      ellipse at 20% 40%,
+    radial-gradient(ellipse at 20% 40%,
       rgba(10, 10, 11, 0.2) 0%,
       rgba(10, 10, 11, 0.85) 55%,
-      rgba(10, 10, 11, 1) 100%
-    );
+      rgba(10, 10, 11, 1) 100%);
 }
 
 .rail-card {
@@ -91,15 +102,16 @@ button:focus-visible,
     border-color 300ms var(--ease-out-expo);
   will-change: transform;
 }
+
 .rail-card:hover {
   transform: translateY(-4px);
 }
 
 .author-surface {
-  --color-bg: #1a1410;
-  --color-fg: #f3ebe0;
-  --color-accent: #c48a5b;
-  --color-muted: #6b5d50;
+  --color-bg: #001219;
+  --color-fg: #f8fafc;
+  --color-accent: #e9c46a;
+  --color-muted: #475569;
 
   background-color: var(--color-bg);
   color: var(--color-fg);
@@ -188,6 +200,7 @@ button:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

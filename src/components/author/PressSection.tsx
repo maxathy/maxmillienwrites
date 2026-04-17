@@ -14,7 +14,7 @@ export function PressSection({ press }: { press: AuthorPress }) {
         </p>
         <h2 className="mb-[var(--space-4)]">Get in touch</h2>
         <p className="mb-[var(--space-8)] text-lg">
-          Press and media inquiries:{' '}
+          Press and media inquiries: {' '}
           <a href={`mailto:${press.email}`} className="font-mono">
             {press.email}
           </a>
