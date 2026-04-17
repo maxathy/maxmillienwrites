@@ -27,7 +27,7 @@ function StackPage() {
             <h1 className="mt-3 font-mono text-[2.25rem] leading-tight md:text-[3rem]">
               What I actually build with
             </h1>
-            <p className="mt-6 text-lg text-[color:var(--color-fg)]/80">
+            <p className="mt-6 mb-6 text-lg text-[color:var(--color-fg)]/80">
               Five layers, chosen for production behavior rather than résumé bingo. Hover any
               primitive for the operator-level note — how I use it, what it&rsquo;s for, and why it
               earned a slot.
@@ -38,7 +38,7 @@ function StackPage() {
             <StackGraph />
           </Suspense>
 
-          <section className="mt-[var(--space-12)] max-w-[72ch] border-t border-white/10 pt-[var(--space-8)]">
+          <section className="mt-[var(--space-8)] max-w-[72ch] border-t border-white/10 pt-[var(--space-6)]">
             <p className="text-[color:var(--color-fg)]/70">
               Looking for a deeper walkthrough on a specific primitive, or want to know how these
               layers cohere in a single HIPAA-scoped system?
