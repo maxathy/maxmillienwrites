@@ -12,7 +12,7 @@ export const clientCaseStudies: ClientCaseStudy[] = [
     slug: 'quiet-horizons',
     title: 'Quiet Horizons TelePsychiatry',
     blurb:
-      'HIPAA-compliant Clinical OS for a concierge psychiatric practice. Ambient AI scribe transforms raw WebSocket audio into signed SOAP notes with zero draft-state writes — immutable audit trail by design.',
+      'HIPAA-compliant Clinical OS for a concierge psychiatric practice. Ambient AI scribe transforms raw WebSocket audio into signed SOAP notes with zero draft-state writes; immutable audit trail enforced at the schema layer.',
     stack: ['Angular 21', 'NestJS', 'Drizzle', 'Vertex AI Gemini', 'GCP BAA'],
     detailHref: '/work/quiet-horizons',
     accent: '#8EE6C8',

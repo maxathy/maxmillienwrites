@@ -49,7 +49,7 @@ export const agentNativeMonorepo: OssContent = {
         Most AI-native products start in a single Next.js app, grow a Python sidecar for model
         code, accumulate a Cloud Function or three, and by month six the team is shipping across
         four repos with mismatched TypeScript versions and no way to test an agent change without
-        deploying three services. The alternative — a heavyweight polyrepo with a platform team —
+        deploying three services. The alternative (a heavyweight polyrepo with a platform team)
         is overkill before you have the engineers to staff it.
       </p>
       <p className="mt-3">
@@ -68,11 +68,11 @@ export const agentNativeMonorepo: OssContent = {
       <>
         <p>
           The repo is four packages. <code>packages/shared</code> holds Zod schemas and
-          TypeScript types — every cross-package call is typed end-to-end. <code>packages/api</code>{' '}
+          TypeScript types; every cross-package call is typed end-to-end. <code>packages/api</code>{' '}
           is a NestJS 11 service with dependency-injected modules. <code>packages/web</code> is a
           React 19 app using server components for the public surface. <code>packages/ai-engine</code>{' '}
           is the agent tier: LangGraph orchestration, Vertex AI inference, and the{' '}
-          <em>Stateless Specialist Pattern</em> — agents are pure functions over typed state, the
+          <em>Stateless Specialist Pattern</em>: agents are pure functions over typed state, the
           orchestration graph is the only stateful surface, and every node is independently
           testable.
         </p>
@@ -88,7 +88,7 @@ export const agentNativeMonorepo: OssContent = {
     <>
       <p>
         <strong>Constraints this enforces:</strong> no package reaches into another&rsquo;s
-        internals — only the published interface. Agents cannot be stateful. Side effects live at
+        internals, only the published interface. Agents cannot be stateful. Side effects live at
         the orchestration boundary, not inside specialist nodes. Shared schemas are the only
         legal cross-package type transport.
       </p>

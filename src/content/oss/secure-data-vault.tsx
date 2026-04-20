@@ -48,7 +48,7 @@ export const secureDataVault: OssContent = {
   problem: (
     <>
       <p>
-        Regulated workloads — HIPAA, SOC 2, state-level privacy regimes — demand column-level
+        Regulated workloads (HIPAA, SOC 2, state-level privacy regimes) demand column-level
         encryption for PHI and PII. The ecosystem answer is usually one of three bad options: a
         heavy enterprise key-management SDK that fights your ORM, application-level encryption
         scattered through service code with no audit trail, or the default posture of &ldquo;the
@@ -93,7 +93,7 @@ export const secureDataVault: OssContent = {
         credentials see only ciphertext and sealed DEKs.
       </p>
       <p className="mt-3">
-        <strong>Does not protect against:</strong> a compromised application runtime — if an
+        <strong>Does not protect against:</strong> a compromised application runtime. If an
         attacker has code execution in the service holding the KMS binding, they can decrypt
         what the service can decrypt. Mitigations (least-privilege IAM, short-lived tokens, and
         runtime attestation) live outside this library.

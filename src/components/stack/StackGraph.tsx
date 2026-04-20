@@ -311,7 +311,7 @@ function StackGraphCanvas() {
                   }}
                   role="button"
                   tabIndex={0}
-                  aria-label={`${n.name} — ${stackGroupMeta[n.group].label}`}
+                  aria-label={`${n.name}: ${stackGroupMeta[n.group].label}`}
                   style={{
                     cursor: 'grab',
                     opacity: dim ? 0.25 : 1,

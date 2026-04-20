@@ -30,7 +30,7 @@ function OssDetailPage() {
   return (
     <>
       <SEO
-        title={`${repo.title} — Open source — Max Millien`}
+        title={`${repo.title} | Open source | Max Millien`}
         description={repo.blurb}
         path={repo.detailHref}
       />

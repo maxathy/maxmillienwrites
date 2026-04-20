@@ -40,7 +40,7 @@ function AuthorPage() {
   return (
     <main className="author-surface">
       <SEO
-        title="Max Millien — Author of Traffic Engineer"
+        title="Max Millien | Author of Traffic Engineer"
         description="Memoir, album, and the story behind PureTome. Traffic Engineer is the unflinching account of a systems engineer who had to debug his own life."
         path="/author"
       />

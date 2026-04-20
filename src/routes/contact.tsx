@@ -11,8 +11,8 @@ function ContactPage() {
   return (
     <>
       <SEO
-        title="Contact — Max Millien"
-        description="Send a note about an engagement, an architecture review, or a specific problem. Responses within 24 hours — max.millien@puretome.com."
+        title="Contact | Max Millien"
+        description="Send a note about an engagement, an architecture review, or a specific problem. Responses within 24 hours at max.millien@puretome.com."
         path="/contact"
       />
       <main className="pt-24 pb-[var(--space-16)]">

@@ -37,7 +37,7 @@ export const authorContent: {
   press: AuthorPress
 } = {
   hero: {
-    h1: 'Max Millien — Author of Traffic Engineer',
+    h1: 'Max Millien | Author of Traffic Engineer',
     tagline: 'The Memoir Was the Prototype. PureTome Is the Engine.',
     bio: [
       'I am an engineer by trade and a writer by survival. I had to reverse-engineer my own mind. I had to debug the crash.',
@@ -57,11 +57,11 @@ export const authorContent: {
     title: 'Traffic Engineer',
     subtitle: 'A Memoir',
     coverSrc: '/author/traffic-engineer-cover.jpg',
-    coverAlt: 'Traffic Engineer — cover',
+    coverAlt: 'Traffic Engineer cover',
     summary: [
-      'Traffic Engineer is the unflinching account of a systems engineer who had to take apart his own life to understand what went wrong. Addiction, incarceration, and the long work of rebuilding — rendered with the same rigor Max brings to production systems.',
+      'Traffic Engineer is the unflinching account of a systems engineer who had to take apart his own life to understand what went wrong. Addiction, incarceration, and the long work of rebuilding, rendered with the same rigor Max brings to production systems.',
       'The book treats a human life the way a principled engineer treats a broken service: collect the logs, identify the failure modes, rebuild from the root cause up. It is a memoir for anyone who suspects that the hardest debugging problem they will ever face is the one running in their own head.',
-      'Written in a voice that refuses to soften, Traffic Engineer is both a survival document and a blueprint — the prototype for the AI Biographer platform, PureTome, that Max went on to build.',
+      'Written in a voice that refuses to soften, Traffic Engineer is both a survival document and a blueprint: the prototype for the AI Biographer platform, PureTome, that Max went on to build.',
     ],
     asin: 'B0FM3J751X',
     buyUrl: 'https://www.amazon.com/Traffic-Engineer-Max-Millien/dp/B0FM3J751X',

@@ -7,7 +7,7 @@ type SEOProps = {
   path?: string
 }
 
-const DEFAULT_TITLE = 'Max Millien — Principal AI Architect | PureTome Labs'
+const DEFAULT_TITLE = 'Max Millien | Principal AI Architect | PureTome Labs'
 const DEFAULT_DESCRIPTION =
   'Boston-based full-stack architect specializing in hybrid RAG, agentic workflows, and HIPAA-compliant AI systems. Available for C2C engagements.'
 

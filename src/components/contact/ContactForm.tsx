@@ -71,7 +71,7 @@ export function ContactForm() {
           Message sent
         </p>
         <p className="mt-3 text-[color:var(--color-fg)]/90">
-          I&rsquo;ll respond within 24 hours —{' '}
+          I&rsquo;ll respond within 24 hours from{' '}
           <span className="font-mono">max.millien@puretome.com</span>.
         </p>
       </div>
@@ -141,7 +141,7 @@ export function ContactForm() {
       <Field
         label="Message"
         htmlFor="contact-message"
-        hint="Context, constraints, timeline — whatever helps me reply well."
+        hint="Context, constraints, timeline: whatever helps me reply well."
         error={errors.message?.message}
       >
         <textarea

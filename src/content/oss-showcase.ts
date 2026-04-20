@@ -26,7 +26,7 @@ export const ossShowcase: OssShowcase[] = [
     githubUrl: 'https://github.com/maxathy/agent-native-monorepo',
     detailHref: '/work/oss/agent-native-monorepo',
     extractedFrom:
-      "Extracted from PureTome's production monorepo. IP scrubbed per the Sanitization Rule — the skeleton, conventions, and orchestration patterns are real; the domain logic is generic.",
+      "Extracted from PureTome's production monorepo. IP scrubbed per the Sanitization Rule: the skeleton, conventions, and orchestration patterns are real; the domain logic is generic.",
   },
   {
     slug: 'secure-data-vault',

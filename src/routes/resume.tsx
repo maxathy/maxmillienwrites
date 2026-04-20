@@ -41,7 +41,7 @@ function ResumePage() {
   return (
     <>
       <SEO
-        title={`${resume.name} — Résumé`}
+        title={`${resume.name} | Résumé`}
         description={`Résumé of ${resume.name}: ${resume.experience[0]?.title} at ${resume.experience[0]?.company}. ${resume.skills[0]?.label} and full-stack architecture.`}
         path="/resume"
       />
@@ -162,7 +162,7 @@ function RoleBlock({ role }: { role: Role }) {
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
         <h3 className="text-lg">
           <span className="font-semibold">{role.company}</span>
-          <span className="text-[color:var(--color-fg)]/50"> — </span>
+          <span className="text-[color:var(--color-fg)]/50"> · </span>
           <span className="text-[color:var(--color-fg)]/90">{role.title}</span>
         </h3>
         {(role.start || role.end) && (

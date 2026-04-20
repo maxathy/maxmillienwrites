@@ -43,7 +43,7 @@ function EngagePage() {
   return (
     <>
       <SEO
-        title="Engage — Max Millien"
+        title="Engage | Max Millien"
         description="How working with PureTome Labs works: rate, terms, week-1 deliverables. Book a 30-minute architecture call."
         path="/engage"
       />

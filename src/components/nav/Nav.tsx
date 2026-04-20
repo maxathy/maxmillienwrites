@@ -31,7 +31,7 @@ export function Nav() {
         <Link
           to="/"
           className="font-mono text-sm tracking-wider text-[color:var(--color-fg)]"
-          aria-label="Max Millien — home"
+          aria-label="Max Millien: home"
         >
           MM<span className="text-[color:var(--color-accent)]">.</span>
         </Link>

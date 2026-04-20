@@ -14,8 +14,8 @@ function StackPage() {
   return (
     <>
       <SEO
-        title="Stack — Max Millien"
-        description="The production stack behind PureTome and Quiet Horizons — hybrid RAG, NestJS, Angular, GCP, and the HIPAA-grade security layer that ties them together. Every primitive with an operator-level note."
+        title="Stack | Max Millien"
+        description="The production stack behind PureTome and Quiet Horizons: hybrid RAG, NestJS, Angular, GCP, and the HIPAA-grade security layer that ties them together. Every primitive with an operator-level note."
         path="/stack"
       />
       <main className="pt-24 pb-[var(--space-16)]">
@@ -28,9 +28,9 @@ function StackPage() {
               What I actually build with
             </h1>
             <p className="mt-6 mb-6 text-lg text-[color:var(--color-fg)]/80">
-              Five layers, chosen for production behavior rather than résumé bingo. Hover any
-              primitive for the operator-level note — how I use it, what it&rsquo;s for, and why it
-              earned a slot.
+              Five layers, chosen for production behavior, not résumé bingo. Hover any
+              primitive for the operator-level note (how I use it, what it&rsquo;s for, and why it
+              earned a slot).
             </p>
           </header>
 

@@ -12,7 +12,7 @@ function WorkIndex() {
   return (
     <>
       <SEO
-        title="Work — Max Millien"
+        title="Work | Max Millien"
         description="Shipped client systems and open-source showcase repos. HIPAA-grade telehealth, agent-native monorepos, realtime voice infra."
         path="/work"
       />

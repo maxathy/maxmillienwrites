@@ -30,7 +30,7 @@ function ClientCaseStudyPage() {
   return (
     <>
       <SEO
-        title={`${study.title} — Max Millien`}
+        title={`${study.title} | Max Millien`}
         description={study.blurb}
         path={study.detailHref}
       />

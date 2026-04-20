@@ -53,7 +53,7 @@ export const realtimeVoiceInfra: OssContent = {
         <span className="font-mono text-[color:var(--color-accent)]">realtime-voice-infra</span>{' '}
         is a production-grade pipeline that streams browser audio through a secure WebSocket to
         Google Speech-to-Text, forwards the transcript to Vertex AI Gemini for structured
-        extraction, and returns a typed result — all without persisting a draft transcript
+        extraction, and returns a typed result, all without persisting a draft transcript
         anywhere. Back-pressure is first-class, reconnect semantics are explicit, and the
         inference path is stateless by construction.
       </p>
@@ -68,14 +68,14 @@ export const realtimeVoiceInfra: OssContent = {
           TLS WebSocket to a NestJS gateway on Cloud Run. The gateway brokers two downstream
           connections: one to Google Speech-to-Text&rsquo;s streaming API for live transcription,
           and one to Vertex AI Gemini for structured extraction when the transcript reaches a
-          semantic boundary. The final typed JSON returns to the client in a single frame —
+          semantic boundary. The final typed JSON returns to the client in a single frame:
           never written to disk, never cached, never logged in plaintext.
         </p>
         <p className="mt-3">
           Back-pressure is handled at two layers: the browser throttles{' '}
           <code>MediaRecorder</code> based on <code>bufferedAmount</code>, and the gateway applies
           a token-bucket rate limit per connection before fanning out to the inference tier.
-          Reconnect semantics are idempotent — clients resume with a session token, the gateway
+          Reconnect semantics are idempotent: clients resume with a session token, the gateway
           re-establishes downstream streams, and in-flight audio chunks that failed to acknowledge
           are replayed in order.
         </p>
@@ -91,8 +91,8 @@ export const realtimeVoiceInfra: OssContent = {
       </p>
       <p className="mt-3">
         <strong>Does not protect against:</strong> a compromised browser runtime or a malicious
-        extension with access to the audio device — these are endpoint-security problems that a
-        streaming pipeline cannot solve. Organizations relying on this pattern for regulated
+        extension with access to the audio device (these are endpoint-security problems that a
+        streaming pipeline cannot solve). Organizations relying on this pattern for regulated
         workloads should pair it with managed-device enforcement.
       </p>
     </>
