@@ -40,7 +40,7 @@ function ClientCaseStudyPage() {
           >
             ← Back to Work
           </Link>
-          <header className="mb-[var(--space-10)] max-w-[72ch]">
+          <header className="mb-[var(--space-10)] max-w-[72ch] pb-6">
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-accent)]">
               Case study
             </p>
