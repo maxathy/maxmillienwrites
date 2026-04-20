@@ -42,7 +42,7 @@ function OssDetailPage() {
           >
             ← Back to Work
           </Link>
-          <header className="mb-[var(--space-10)] max-w-[72ch]">
+          <header className="mb-[var(--space-10)] max-w-[72ch] pb-6">
             <p className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-fg)]/60">
               Open source · auditable proof
             </p>
@@ -83,7 +83,7 @@ function OssDetailPage() {
             <div className="flex flex-col gap-[var(--space-10)] border-t border-white/10 pt-[var(--space-8)]">
               <DeepDiveSection label="Problem">{content.problem}</DeepDiveSection>
 
-              <section>
+              <section className="mt-6 mb-6">
                 <SectionLabel>Architecture</SectionLabel>
                 <div className="mt-[var(--space-4)]">{content.architecture.diagram}</div>
                 <div className="mt-[var(--space-4)] max-w-[72ch] space-y-3 text-[color:var(--color-fg)]/80">
@@ -93,11 +93,11 @@ function OssDetailPage() {
 
               <DeepDiveSection label="Threat model · constraints">
                 {content.threatModel}
-              </DeepDiveSection>
+              </DeepDiveSection><br />
 
-              <DeepDiveSection label="Extraction note">
+              <DeepDiveSection label="Extraction note" >
                 {content.extractionNote}
-              </DeepDiveSection>
+              </DeepDiveSection><br />
 
               <section className="border-t border-white/10 pt-[var(--space-6)]">
                 <a
