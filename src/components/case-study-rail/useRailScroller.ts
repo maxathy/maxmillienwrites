@@ -1,9 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 
+const DRAG_THRESHOLD = 6
+
 export function useRailScroller(itemCount: number) {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
-  const drag = useRef<{ x: number; scrollLeft: number } | null>(null)
+  const drag = useRef<{
+    x: number
+    y: number
+    scrollLeft: number
+    pointerId: number
+    dragging: boolean
+  } | null>(null)
 
   useEffect(() => {
     const el = scrollerRef.current
@@ -49,28 +57,59 @@ export function useRailScroller(itemCount: number) {
     const el = scrollerRef.current
     if (!el) return
     if (e.pointerType === 'touch') return
-    drag.current = { x: e.clientX, scrollLeft: el.scrollLeft }
-    el.setPointerCapture(e.pointerId)
-    el.style.cursor = 'grabbing'
+    drag.current = {
+      x: e.clientX,
+      y: e.clientY,
+      scrollLeft: el.scrollLeft,
+      pointerId: e.pointerId,
+      dragging: false,
+    }
   }
 
   const onPointerMove = (e: React.PointerEvent) => {
     const el = scrollerRef.current
     if (!el || !drag.current) return
-    el.scrollLeft = drag.current.scrollLeft - (e.clientX - drag.current.x)
-  }
-
-  const onPointerUp = (e: React.PointerEvent) => {
-    const el = scrollerRef.current
-    drag.current = null
-    if (el) {
-      el.style.cursor = ''
+    const dx = e.clientX - drag.current.x
+    const dy = e.clientY - drag.current.y
+    if (!drag.current.dragging) {
+      if (Math.abs(dx) <= DRAG_THRESHOLD || Math.abs(dx) <= Math.abs(dy)) return
+      drag.current.dragging = true
       try {
-        el.releasePointerCapture(e.pointerId)
+        el.setPointerCapture(e.pointerId)
       } catch {
         /* no-op */
       }
+      el.style.cursor = 'grabbing'
     }
+    el.scrollLeft = drag.current.scrollLeft - dx
+  }
+
+  const finishDrag = (e: React.PointerEvent, suppressClick: boolean) => {
+    const el = scrollerRef.current
+    const wasDragging = drag.current?.dragging === true
+    drag.current = null
+    if (!el) return
+    el.style.cursor = ''
+    try {
+      el.releasePointerCapture(e.pointerId)
+    } catch {
+      /* no-op */
+    }
+    if (suppressClick && wasDragging) {
+      const swallow = (ev: Event) => {
+        ev.preventDefault()
+        ev.stopPropagation()
+      }
+      el.addEventListener('click', swallow, { capture: true, once: true })
+    }
+  }
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    finishDrag(e, true)
+  }
+
+  const onPointerCancel = (e: React.PointerEvent) => {
+    finishDrag(e, false)
   }
 
   return {
@@ -82,7 +121,7 @@ export function useRailScroller(itemCount: number) {
       onPointerDown,
       onPointerMove,
       onPointerUp,
-      onPointerCancel: onPointerUp,
+      onPointerCancel,
     },
   }
 }
