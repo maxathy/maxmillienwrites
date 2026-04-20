@@ -6,7 +6,7 @@ function ThreeBrainDiagram() {
       viewBox="0 0 680 320"
       className="w-full rounded-[var(--radius-md)] border border-white/10 bg-white/[0.02]"
       role="img"
-      aria-label="PureTome three-brain memory topology: the web client calls the main API, which owns the MongoDB ground-truth store. On every request the main API assembles a briefing package and calls the stateless AI service, which reads from two further memory stores — pgvector (the Library, for semantic recall over manuscript chunks) and Neo4j (the Journal, for episodic memory and author identity)."
+      aria-label="PureTome three-brain memory topology: the web client calls the main API, which owns the MongoDB ground-truth store. On every request the main API assembles a briefing package and calls the stateless AI service, which reads from two further memory stores: pgvector (the Library, for semantic recall over manuscript chunks) and Neo4j (the Journal, for episodic memory and author identity)."
     >
       <defs>
         <marker id="arrow-pt-brain" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -123,7 +123,7 @@ export const puretome: ClientCaseStudyContent = {
         recalls what the author wrote in chunks but forgets <em>who the author is</em> across
         sessions. It drifts off the stated narrative arc, invents continuity the user never
         established (&ldquo;as you mentioned earlier&hellip;&rdquo; when they hadn&rsquo;t), and
-        loses the thread of long-running identity facts — names, dates, places, relationships —
+        loses the thread of long-running identity facts (names, dates, places, relationships)
         the second the conversation rolls past the context window. For a memoir platform,
         that&rsquo;s a trust failure. The author stops believing the partner is listening.
       </p>
@@ -133,7 +133,7 @@ export const puretome: ClientCaseStudyContent = {
         single briefing package the LLM sees on every turn. Vector retrieval over manuscript
         text answers <em>what has this author written</em>. A property graph answers{' '}
         <em>who this author is and where they are in their arc</em>. An authoritative document
-        store — owned by the main API, never by the AI service — answers{' '}
+        store (owned by the main API, never by the AI service) answers{' '}
         <em>what the true state of the work is</em>. The combination measured a 40% narrative-coherence
         lift over a plain-RAG baseline in blind evaluation.
       </p>
@@ -149,13 +149,13 @@ export const puretome: ClientCaseStudyContent = {
           with pgvector: chunked manuscript text embedded and indexed for semantic recall. The{' '}
           <span className="font-mono text-[color:var(--color-accent)]">Journal</span> is Neo4j: a
           typed graph of users, memoirs, sessions, interactions, extracted author facts, and
-          journey milestones — the episodic memory and identity model. The{' '}
+          journey milestones: the episodic memory and identity model. The{' '}
           <span className="font-mono text-[color:var(--color-accent)]">Ground Truth</span> is
           MongoDB behind the main API: the canonical memoir document, author profile, and account
           state.
         </p>
         <p className="mt-3">
-          Why three: vector alone hallucinates continuity because it has no identity model — every
+          Why three: vector alone hallucinates continuity because it has no identity model. Every
           chunk is a stranger. Graph alone is blind to semantic similarity; it can tell you that
           the author mentioned a sister named Clara, but not that the paragraph they&rsquo;re
           writing now is really about Clara under a different frame. Documents alone can&rsquo;t
@@ -165,8 +165,8 @@ export const puretome: ClientCaseStudyContent = {
 
         <p className="mt-6">
           <strong>Stateless AI service.</strong> The AI service holds zero persistent user state.
-          On every request the main API assembles a briefing package — persona instructions,
-          memoir object, journey summary, recent conversation — and ships it as the request body.
+          On every request the main API assembles a briefing package (persona instructions,
+          memoir object, journey summary, recent conversation) and ships it as the request body.
           The AI service reads from the Library and Journal, calls the model, returns, and
           forgets.
         </p>
@@ -174,13 +174,13 @@ export const puretome: ClientCaseStudyContent = {
           The payload is larger than you&rsquo;d see in a session-affinity design, and that&rsquo;s
           the trade. In exchange: horizontal scale without sticky sessions, trivially testable
           requests (the brief <em>is</em> the fixture), a clean audit story for where user data
-          lives, and a hard trust boundary — the AI service cannot leak what was never stored
+          lives, and a hard trust boundary. The AI service cannot leak what was never stored
           there.
         </p>
 
         <p className="mt-6">
           <strong>LangGraph orchestration with context budgeting.</strong> Chat is a stateful
-          graph, not a script. The entry node — <code>conductor</code> — classifies user intent
+          graph, not a script. The entry node (<code>conductor</code>) classifies user intent
           and selects the persona. Two nodes then run in parallel:{' '}
           <code>loadAndTransform</code> pulls journal state and the user&rsquo;s stated goals;{' '}
           <code>retrieveRagContext</code> executes semantic search against the Library. Both feed
@@ -192,8 +192,8 @@ export const puretome: ClientCaseStudyContent = {
           fail the user-facing response.
         </p>
         <p className="mt-3">
-          The context window is a contested resource. Five sources compete for it — system prompt,
-          conversation history, journey summary, the live memoir object, and RAG context —
+          The context window is a contested resource. Five sources compete for it (system prompt,
+          conversation history, journey summary, the live memoir object, and RAG context),
           and they&rsquo;re budgeted explicitly. Conversation history and the journey summary are{' '}
           <em>protected</em>: they cannot be truncated, because losing them is the exact failure
           mode the architecture exists to prevent. RAG context and the memoir object are{' '}
@@ -209,9 +209,9 @@ export const puretome: ClientCaseStudyContent = {
         </p>
         <p className="mt-3">
           The operational payoff is backpressure you can see. When the embedding service is
-          degraded, new chunks land in the Library later than they otherwise would — but a chat
+          degraded, new chunks land in the Library later than they otherwise would. A chat
           turn never fails on it. When the summarization worker is slow, the journal&rsquo;s
-          crystallized summaries lag — but the protected conversation-history slot still carries
+          crystallized summaries lag, but the protected conversation-history slot still carries
           the freshest N turns. Synchronous request-path code stays small and easy to reason
           about.
         </p>
@@ -227,16 +227,16 @@ export const puretome: ClientCaseStudyContent = {
             Ground truth lives in the main API. The AI service receives only what the briefing
             package includes for a given request, and scrubs responses through PII
             deidentification before any persistence to the journal. The model provider is
-            swappable per environment — a local provider in development, managed inference in
-            production — behind a single interface, so a tenant that requires region-pinned
+            swappable per environment (a local provider in development, managed inference in
+            production) behind a single interface, so a tenant that requires region-pinned
             inference or a specific model family is a config change, not a rewrite.
           </p>
           <p className="mt-3">
             <strong>Does not protect against:</strong> a compromised model provider seeing the
-            briefing content during inference — that&rsquo;s a contractual and region-selection
-            problem, not an architectural one. Same for a compromised main API, which by design
-            holds the keys to ground truth; the split trust boundary narrows the blast radius
-            without pretending to eliminate it.
+            briefing content during inference. That&rsquo;s a contractual and region-selection
+            problem, not an architectural one. Same for a compromised main API, which holds the
+            keys to ground truth; the split trust boundary narrows the blast radius without
+            pretending to eliminate it.
           </p>
         </>
       ),
@@ -262,8 +262,8 @@ export const puretome: ClientCaseStudyContent = {
   ),
   engagementNote: (
     <p>
-      PureTome was designed and built under PureTome Labs — an independent architecture-and-build
-      practice, C2C, one architect doing the work rather than a staffing layer. If you&rsquo;re
+      PureTome was designed and built under PureTome Labs (an independent architecture-and-build
+      practice, C2C, one architect doing the work, not a staffing layer). If you&rsquo;re
       building AI product around long-form user content and want a memory system that doesn&rsquo;t
       hallucinate continuity, a 30-minute architecture call is a reasonable first move.
     </p>
