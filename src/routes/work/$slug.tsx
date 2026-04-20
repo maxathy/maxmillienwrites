@@ -2,12 +2,14 @@ import { createFileRoute, Link, notFound } from '@tanstack/react-router'
 import { Container } from '../../components/ui/Container'
 import { SEO } from '../../components/seo/SEO'
 import { clientCaseStudies } from '../../content/client-case-studies'
+import { clientCaseStudyContent } from '../../content/case-studies'
 
 export const Route = createFileRoute('/work/$slug')({
   loader: ({ params }) => {
     const study = clientCaseStudies.find((s) => s.slug === params.slug)
     if (!study) throw notFound()
-    return { study }
+    const content = clientCaseStudyContent[params.slug] ?? null
+    return { study, content }
   },
   component: ClientCaseStudyPage,
   notFoundComponent: () => (
@@ -23,7 +25,7 @@ export const Route = createFileRoute('/work/$slug')({
 })
 
 function ClientCaseStudyPage() {
-  const { study } = Route.useLoaderData()
+  const { study, content } = Route.useLoaderData()
 
   return (
     <>
@@ -62,26 +64,91 @@ function ClientCaseStudyPage() {
             </ul>
           </header>
 
-          <section className="max-w-[72ch] border-t border-white/10 pt-[var(--space-8)]">
-            <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-fg)]/60">
-              Long-form write-up
-            </h2>
-            <p className="text-[color:var(--color-fg)]/70">
-              Full architecture narrative publishes in the next content pass.
-              In the meantime:
-            </p>
-            <div className="mt-6 flex flex-wrap gap-4">
-              <Link
-                to="/engage"
-                hash="book"
-                className="inline-flex items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-4 py-2 text-sm font-semibold text-[color:var(--color-bg)]"
-              >
-                Book a 30-min architecture call →
-              </Link>
+          {content ? (
+            <div className="flex flex-col gap-[var(--space-10)] border-t border-white/10 pt-[var(--space-8)]">
+              <DeepDiveSection label="Long-form write-up · problem">
+                {content.problem}
+              </DeepDiveSection>
+
+              <section>
+                <SectionLabel>Architecture</SectionLabel>
+                <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-6)]">
+                  {content.architecture.diagrams.map((diagram, i) => (
+                    <div key={i}>{diagram}</div>
+                  ))}
+                </div>
+                <div className="mt-[var(--space-6)] max-w-[72ch] space-y-3 text-[color:var(--color-fg)]/80">
+                  {content.architecture.walkthrough}
+                </div>
+              </section>
+
+              {content.additionalSections?.map((section) => (
+                <DeepDiveSection key={section.heading} label={section.heading}>
+                  {section.body}
+                </DeepDiveSection>
+              ))}
+
+              <DeepDiveSection label="Impact">{content.impact}</DeepDiveSection>
+
+              <DeepDiveSection label="Engagement note">
+                {content.engagementNote}
+              </DeepDiveSection>
+
+              <section className="border-t border-white/10 pt-[var(--space-6)]">
+                <Link
+                  to="/engage"
+                  hash="book"
+                  className="inline-flex items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[color:var(--color-bg)]"
+                >
+                  Book a 30-min architecture call →
+                </Link>
+              </section>
             </div>
-          </section>
+          ) : (
+            <section className="max-w-[72ch] border-t border-white/10 pt-[var(--space-8)]">
+              <SectionLabel>Long-form write-up</SectionLabel>
+              <p className="mt-4 text-[color:var(--color-fg)]/70">
+                Full architecture narrative publishes in the next content pass.
+                In the meantime:
+              </p>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <Link
+                  to="/engage"
+                  hash="book"
+                  className="inline-flex items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-4 py-2 text-sm font-semibold text-[color:var(--color-bg)]"
+                >
+                  Book a 30-min architecture call →
+                </Link>
+              </div>
+            </section>
+          )}
         </Container>
       </main>
     </>
+  )
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-fg)]/60">
+      {children}
+    </h2>
+  )
+}
+
+function DeepDiveSection({
+  label,
+  children,
+}: {
+  label: string
+  children: React.ReactNode
+}) {
+  return (
+    <section>
+      <SectionLabel>{label}</SectionLabel>
+      <div className="mt-[var(--space-4)] max-w-[72ch] space-y-3 text-[color:var(--color-fg)]/80">
+        {children}
+      </div>
+    </section>
   )
 }
