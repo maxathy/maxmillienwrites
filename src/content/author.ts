@@ -59,9 +59,9 @@ export const authorContent: {
     coverSrc: '/author/traffic-engineer-cover.jpg',
     coverAlt: 'Traffic Engineer cover',
     summary: [
-      'Traffic Engineer is the unflinching account of a systems engineer who had to take apart his own life to understand what went wrong. Addiction, incarceration, and the long work of rebuilding, rendered with the same rigor Max brings to production systems.',
-      'The book treats a human life the way a principled engineer treats a broken service: collect the logs, identify the failure modes, rebuild from the root cause up. It is a memoir for anyone who suspects that the hardest debugging problem they will ever face is the one running in their own head.',
-      'Written in a voice that refuses to soften, Traffic Engineer is both a survival document and a blueprint: the prototype for the AI Biographer platform, PureTome, that Max went on to build.',
+      'For Max Millien, reality was just another system to optimize. A restless mind. A gnawing hunger for control and escape. When he found chemical oblivion, he treated it like a project to perfect.',
+      'What began as self-medication scaled into a total structural collapse, engineered with ruthless precision. But logic cannot patch betrayal, and no architecture survives human chaos.',
+      'Traffic Engineer is a harrowing memoir of freefall, a six-year exile, and the methodical work of resurrection. It is the record of a man who thought he could hack his way through the dark, only to discover the most complex system he would ever rebuild from zero was himself.',
     ],
     asin: 'B0FM3J751X',
     buyUrl: 'https://www.amazon.com/Traffic-Engineer-Max-Millien/dp/B0FM3J751X',
