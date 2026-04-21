@@ -223,7 +223,7 @@ export const quietHorizons: ClientCaseStudyContent = {
           audit failures never degrade the user-facing response. One annual BAA review,
           not a matrix of vendor compliance tickets.
         </p>
-        <p className="mt-3">
+        <p className="mt-3 mb-3">
           The payoff is a compliance posture a practice owner can actually explain. PHI lives
           only in the application database, encrypted. Every touch is in the audit log. Every
           covered service vendor is the same vendor.

@@ -21,7 +21,7 @@ function ThreeBrainDiagram() {
         <text x="80" y="46" textAnchor="middle">Web</text>
         <text x="80" y="62" textAnchor="middle" fillOpacity="0.6">React 19</text>
 
-        <rect x="200" y="20" width="160" height="56" rx="8" fill="none" stroke="#F5F4F0" strokeOpacity="0.3" />
+        <rect x="180" y="20" width="200" height="56" rx="8" fill="none" stroke="#F5F4F0" strokeOpacity="0.3" />
         <text x="280" y="46" textAnchor="middle">Main API</text>
         <text x="280" y="62" textAnchor="middle" fillOpacity="0.6">Express · owns ground truth</text>
 
@@ -29,8 +29,8 @@ function ThreeBrainDiagram() {
         <text x="520" y="46" textAnchor="middle">Ground Truth</text>
         <text x="520" y="62" textAnchor="middle" fillOpacity="0.6">MongoDB · memoir + profile</text>
 
-        <line x1="140" y1="48" x2="200" y2="48" stroke="#F5F4F0" strokeOpacity="0.5" markerEnd="url(#arrow-pt-brain-muted)" />
-        <line x1="360" y1="48" x2="420" y2="48" stroke="#F5F4F0" strokeOpacity="0.5" markerEnd="url(#arrow-pt-brain-muted)" />
+        <line x1="140" y1="48" x2="180" y2="48" stroke="#F5F4F0" strokeOpacity="0.5" markerEnd="url(#arrow-pt-brain-muted)" />
+        <line x1="380" y1="48" x2="420" y2="48" stroke="#F5F4F0" strokeOpacity="0.5" markerEnd="url(#arrow-pt-brain-muted)" />
 
         <rect x="200" y="140" width="240" height="64" rx="8" fill="none" stroke="#D4FF4F" strokeOpacity="0.6" />
         <text x="320" y="168" textAnchor="middle">AI Service (stateless)</text>
@@ -207,7 +207,7 @@ export const puretome: ClientCaseStudyContent = {
           extraction between past events, and long-conversation summarization all run behind
           Pub/Sub topics with their own retry and dead-letter semantics.
         </p>
-        <p className="mt-3">
+        <p className="mt-3 mb-3">
           The operational payoff is backpressure you can see. When the embedding service is
           degraded, new chunks land in the Library later than they otherwise would. A chat
           turn never fails on it. When the summarization worker is slow, the journal&rsquo;s
@@ -223,7 +223,7 @@ export const puretome: ClientCaseStudyContent = {
       heading: 'Data-handling posture',
       body: (
         <>
-          <p>
+          <p >
             Ground truth lives in the main API. The AI service receives only what the briefing
             package includes for a given request, and scrubs responses through PII
             deidentification before any persistence to the journal. The model provider is

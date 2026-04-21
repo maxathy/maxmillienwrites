@@ -70,7 +70,7 @@ function ClientCaseStudyPage() {
                 {content.problem}
               </DeepDiveSection>
 
-              <section>
+              <section className="mt-6">
                 <SectionLabel>Architecture</SectionLabel>
                 <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-6)]">
                   {content.architecture.diagrams.map((diagram, i) => (
@@ -87,13 +87,13 @@ function ClientCaseStudyPage() {
                   {section.body}
                 </DeepDiveSection>
               ))}
-
+              <br />
               <DeepDiveSection label="Impact">{content.impact}</DeepDiveSection>
-
+              <br />
               <DeepDiveSection label="Engagement note">
                 {content.engagementNote}
               </DeepDiveSection>
-
+              <br />
               <section className="border-t border-white/10 pt-[var(--space-6)]">
                 <Link
                   to="/engage"
