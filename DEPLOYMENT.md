@@ -118,6 +118,7 @@ Once 2c works, wire CI so `git push origin main` ships automatically.
    - **Cloud Build Editor** (Required for the build process of Cloud Functions)
    - **Artifact Registry Administrator** (Required to store function container images)
    - **Service Account User** (Required to allow the deployment process to assume the function's identity)
+   - **Secret Manager Secret Accessor** (Required to read secrets like `RESEND_API_KEY` during deployment)
 6. After creation, find the service account in the list, go to **Keys** tab → **Add Key** → **Create new key** → **JSON**.
 7. Save the downloaded JSON file.
 
