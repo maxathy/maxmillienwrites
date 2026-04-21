@@ -106,26 +106,33 @@ If the contact form returns 502, the Resend domain isn't verified yet — wait i
 
 Once 2c works, wire CI so `git push origin main` ships automatically.
 
-### 3a · Create the CI token
+### 3a · Create a Firebase Service Account
 
-```bash
-firebase login:ci
-```
-
-This opens a browser flow. Copy the token printed at the end (starts with `1//...`).
+1. Go to the [Firebase Console](https://console.firebase.google.com/) → **Project Settings** → **Service accounts**.
+2. Click **Manage service account permissions**. This opens the Google Cloud Console.
+3. Click **+ CREATE SERVICE ACCOUNT**.
+4. Name it `github-actions-deploy`.
+5. Grant the following roles:
+   - **Firebase Admin** (Provides full access to Firebase resources like Hosting and Firestore)
+   - **Cloud Functions Admin** (Required to manage and deploy Cloud Functions)
+   - **Cloud Build Editor** (Required for the build process of Cloud Functions)
+   - **Artifact Registry Administrator** (Required to store function container images)
+   - **Service Account User** (Required to allow the deployment process to assume the function's identity)
+6. After creation, find the service account in the list, go to **Keys** tab → **Add Key** → **Create new key** → **JSON**.
+7. Save the downloaded JSON file.
 
 ### 3b · Add to GitHub
 
 Repo → **Settings → Secrets and variables → Actions → New repository secret**:
-- Name: `FIREBASE_TOKEN`
-- Value: *(paste the token)*
+- Name: `FIREBASE_SERVICE_ACCOUNT_JSON`
+- Value: *(paste the entire contents of the JSON file you downloaded)*
 
 ### 3c · Test
 
 Push any trivial change to `main` (e.g. bump a copy string). Watch **Actions** tab — `Deploy` workflow should go green in ~3–5 min. Re-verify the `.web.app` URL after the run.
 
 **If the workflow fails on `firebase deploy`:**
-- `Error: HTTP Error 403` → the token is wrong or expired; regenerate with `firebase login:ci`
+- `Error: HTTP Error 403` → the service account is missing required roles. Re-verify the roles detailed in step 3a.
 - `Error: Failed to load function definition` → secret not set in the environment; re-run step 2b (secrets are per-project, not per-deploy)
 
 ---
@@ -293,7 +300,7 @@ firebase deploy --only functions:contact        # restart with new secret
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| `firebase deploy` fails with `Error: HTTP 403` | Expired CI token or wrong project | `firebase login` and re-verify `firebase projects:list` |
+| `firebase deploy` fails with `Error: HTTP 403` | Missing service account roles or incorrect secret | Verify IAM roles in Google Cloud Console and ensure `FIREBASE_SERVICE_ACCOUNT_JSON` is valid JSON |
 | Contact form returns 502 | Resend domain not verified, or API key wrong | Resend dashboard → verify domain; re-run `firebase functions:secrets:set` |
 | Contact form returns CORS error | Origin not in allowlist | Check `functions/src/contact.ts:8-12`; add the origin if it's a new domain |
 | Site loads but shows old Carrd content | DNS not propagated yet | `dig` the domain; wait 5–30 min; clear browser cache |
