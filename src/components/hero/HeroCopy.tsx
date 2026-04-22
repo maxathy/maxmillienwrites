@@ -38,7 +38,7 @@ export function HeroCopy() {
             />
           )}
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-accent)]">
-            Principal AI Architect
+            {showHeadshot ? 'Principal AI Architect' : 'AI Architecture Consultancy'}
           </p>
         </div>
 
