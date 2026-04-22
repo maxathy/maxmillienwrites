@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import { Container } from '../ui/Container'
 import { NavLink } from './NavLink'
+import { isLabs } from '../../lib/tenant'
 
 const LINKS = [
   { to: '/work', label: 'Work' },
@@ -13,6 +14,7 @@ const LINKS = [
 
 export function Nav() {
   const [open, setOpen] = useState(false)
+  const labs = isLabs()
 
   useEffect(() => {
     if (!open) return
@@ -30,10 +32,25 @@ export function Nav() {
       <Container className="flex h-16 items-center justify-between">
         <Link
           to="/"
-          className="font-mono text-sm tracking-wider text-[color:var(--color-fg)]"
-          aria-label="Max Millien: home"
+          className="flex items-center gap-2 text-[color:var(--color-fg)]"
+          aria-label={labs ? 'PureTome Labs: home' : 'Max Millien: home'}
         >
-          MM<span className="text-[color:var(--color-accent)]">.</span>
+          {labs ? (
+            <>
+              <img
+                src="/ptl-logo-small.png"
+                alt=""
+                width={40}
+                height={40}
+                className="h-10 w-auto mix-blend-screen"
+              />
+              <span className="font-mono text-sm tracking-wider">PureTome Labs</span>
+            </>
+          ) : (
+            <span className="font-mono text-sm tracking-wider">
+              MM<span className="text-[color:var(--color-accent)]">.</span>
+            </span>
+          )}
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
