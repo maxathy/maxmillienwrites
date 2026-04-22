@@ -1,15 +1,12 @@
 import { useEffect } from 'react'
 import { buildMeta } from '../../lib/seo'
+import { getTenantMeta } from '../../lib/tenant'
 
 type SEOProps = {
   title?: string
   description?: string
   path?: string
 }
-
-const DEFAULT_TITLE = 'Max Millien | Principal AI Architect | PureTome Labs'
-const DEFAULT_DESCRIPTION =
-  'Boston-based full-stack architect specializing in hybrid RAG, agentic workflows, and HIPAA-compliant AI systems. Available for C2C engagements.'
 
 function setMeta(selector: string, create: () => HTMLElement, attr: string, value: string) {
   let el = document.head.querySelector<HTMLElement>(selector)
@@ -21,9 +18,10 @@ function setMeta(selector: string, create: () => HTMLElement, attr: string, valu
 }
 
 export function SEO({ title, description, path = '/' }: SEOProps) {
+  const tenant = getTenantMeta()
   const meta = buildMeta({
-    title: title ?? DEFAULT_TITLE,
-    description: description ?? DEFAULT_DESCRIPTION,
+    title: title ?? tenant.defaultTitle,
+    description: description ?? tenant.defaultDescription,
     path,
   })
 
@@ -82,12 +80,38 @@ export function SEO({ title, description, path = '/' }: SEOProps) {
       'website',
     )
     setMeta(
+      'meta[property="og:image"]',
+      () => {
+        const el = document.createElement('meta')
+        el.setAttribute('property', 'og:image')
+        return el
+      },
+      'content',
+      meta.ogImage,
+    )
+    setMeta(
+      'meta[property="og:site_name"]',
+      () => {
+        const el = document.createElement('meta')
+        el.setAttribute('property', 'og:site_name')
+        return el
+      },
+      'content',
+      meta.siteName,
+    )
+    setMeta(
       'meta[name="twitter:card"]',
       () => Object.assign(document.createElement('meta'), { name: 'twitter:card' }),
       'content',
       'summary_large_image',
     )
-  }, [meta.title, meta.description, meta.canonical])
+    setMeta(
+      'meta[name="twitter:image"]',
+      () => Object.assign(document.createElement('meta'), { name: 'twitter:image' }),
+      'content',
+      meta.ogImage,
+    )
+  }, [meta.title, meta.description, meta.canonical, meta.ogImage, meta.siteName])
 
   return null
 }
