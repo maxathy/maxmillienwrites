@@ -8,14 +8,7 @@ export function LeadArchitect() {
       className="relative border-t border-white/5 py-[var(--space-16)]"
     >
       <Container>
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--color-accent)]">
-          The Lead Architect
-        </p>
-        <h2 className="mt-3 max-w-[22ch]">
-          One practitioner, accountable for the stack.
-        </h2>
-
-        <div className="mt-[var(--space-8)] grid items-start gap-[var(--space-8)] md:grid-cols-[auto_1fr]">
+        <div className="grid items-start gap-[var(--space-8)] md:grid-cols-[auto_1fr]">
           <img
             src="/headshot.jpeg"
             alt="Max Millien"
