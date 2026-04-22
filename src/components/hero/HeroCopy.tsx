@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { useRef } from 'react'
 import { Container } from '../ui/Container'
 import { useMagneticHover } from '../../lib/motion'
+import { isLabs } from '../../lib/tenant'
 
 const TRUST = [
   'PureTome',
@@ -15,24 +16,27 @@ const TRUST = [
 export function HeroCopy() {
   const ctaRef = useRef<HTMLAnchorElement>(null)
   useMagneticHover(ctaRef, 0.25)
+  const showHeadshot = !isLabs()
 
   return (
     <Container className="relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-center py-[var(--space-12)]">
       <div className="max-w-[56ch]">
         <div className="mb-6 flex items-center gap-4">
-          <img
-            src="/headshot.jpeg"
-            alt="Max Millien"
-            width={72}
-            height={72}
-            loading="eager"
-            fetchPriority="high"
-            className="h-[72px] w-[72px] rounded-full object-cover"
-            style={{
-              outline: '1px solid var(--color-accent)',
-              outlineOffset: '3px',
-            }}
-          />
+          {showHeadshot && (
+            <img
+              src="/headshot.jpeg"
+              alt="Max Millien"
+              width={72}
+              height={72}
+              loading="eager"
+              fetchPriority="high"
+              className="h-[72px] w-[72px] rounded-full object-cover"
+              style={{
+                outline: '1px solid var(--color-accent)',
+                outlineOffset: '3px',
+              }}
+            />
+          )}
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--color-accent)]">
             Principal AI Architect
           </p>
