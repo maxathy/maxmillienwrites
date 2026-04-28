@@ -1,7 +1,9 @@
 import { Link } from '@tanstack/react-router'
 import { Container } from '../ui/Container'
+import { isLabs } from '../../lib/tenant'
 
 export function Footer() {
+  const labs = isLabs()
   return (
     <footer className="mt-[var(--space-16)] border-t border-white/5 bg-[color:var(--color-bg)] py-[var(--space-12)] text-sm text-[color:var(--color-fg)]/75">
       <Container>
@@ -51,9 +53,11 @@ export function Footer() {
 
         <div className="mt-[var(--space-6)] flex flex-wrap items-center justify-between gap-3 border-t border-white/5 pt-6 text-xs text-[color:var(--color-muted)]">
           <span>© 2026 PureTome Labs</span>
-          <Link to="/author" className="hover:text-[color:var(--color-fg)]">
-            Also an author →
-          </Link>
+          {!labs && (
+            <Link to="/author" className="hover:text-[color:var(--color-fg)]">
+              Also an author →
+            </Link>
+          )}
         </div>
       </Container>
     </footer>
