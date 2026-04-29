@@ -35,7 +35,7 @@ export function LeadArchitect() {
                 hash="book"
                 className="inline-flex items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-5 py-3 text-sm font-semibold text-[color:var(--color-bg)] transition-shadow hover:shadow-[0_0_0_6px_color-mix(in_oklab,var(--color-accent)_18%,transparent)]"
               >
-                Book a 30-min architecture call →
+                Book a sprint assessment →
               </Link>
               <Link
                 to="/resume"

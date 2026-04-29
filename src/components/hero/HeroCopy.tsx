@@ -16,7 +16,11 @@ const TRUST = [
 export function HeroCopy() {
   const ctaRef = useRef<HTMLAnchorElement>(null)
   useMagneticHover(ctaRef, 0.25)
-  const showHeadshot = !isLabs()
+  const labs = isLabs()
+  const showHeadshot = !labs
+  const ctaLabel = labs
+    ? 'Book a sprint assessment →'
+    : 'Book a 30-min architecture call →'
 
   return (
     <Container className="relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-center py-[var(--space-12)]">
@@ -61,7 +65,7 @@ export function HeroCopy() {
             hash="book"
             className="inline-flex items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-5 py-3 text-sm font-semibold text-[color:var(--color-bg)] transition-shadow hover:shadow-[0_0_0_6px_color-mix(in_oklab,var(--color-accent)_18%,transparent)] will-change-transform"
           >
-            Book a 30-min architecture call →
+            {ctaLabel}
           </Link>
           <a
             href="#work"

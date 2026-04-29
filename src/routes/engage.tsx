@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { Container } from '../components/ui/Container'
 import { SEO } from '../components/seo/SEO'
 import { CalendlyEmbed } from '../components/engage/CalendlyEmbed'
+import { isLabs } from '../lib/tenant'
 
 export const Route = createFileRoute('/engage')({
   component: EngagePage,
@@ -39,6 +40,14 @@ function EngagePage() {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
   }, [])
+
+  const labs = isLabs()
+  const bookHeading = labs
+    ? 'Book a sprint assessment.'
+    : 'Book a 30-min architecture call.'
+  const bookSubhead = labs
+    ? "Three questions, then a 30-minute call. We'll triage the bottleneck and scope the first sprint."
+    : "No deck, no pitch. Bring the problem, we'll sketch the first three weeks together on the call."
 
   return (
     <>
@@ -98,11 +107,10 @@ function EngagePage() {
 
           <section id="book" className="scroll-mt-24">
             <h2 className="mb-3 text-[2rem] leading-tight md:text-[2.5rem]">
-              Book a 30-min architecture call.
+              {bookHeading}
             </h2>
             <p className="mb-[var(--space-6)] max-w-[52ch] text-[color:var(--color-fg)]/75">
-              No deck, no pitch. Bring the problem, we'll sketch the first
-              three weeks together on the call.
+              {bookSubhead}
             </p>
             <CalendlyEmbed />
           </section>
