@@ -8,6 +8,7 @@ const RESEND_API_KEY = defineSecret('RESEND_API_KEY')
 const ALLOWED_ORIGINS = new Set([
   'https://maxmillienwrites.com',
   'https://www.maxmillienwrites.com',
+  'https://labs.puretome.com',
   'http://localhost:5173',
 ])
 
