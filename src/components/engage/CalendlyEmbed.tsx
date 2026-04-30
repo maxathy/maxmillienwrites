@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { isLabs } from '../../lib/tenant'
 
-const PERSONAL_CALENDLY_URL = 'https://calendly.com/max-millien'
-const LABS_CALENDLY_URL = 'https://calendly.com/max-millien/sprint-assessment'
+const CALENDLY_URL = 'https://calendly.com/max-millien'
 const WIDGET_SRC = 'https://assets.calendly.com/assets/external/widget.js'
 const WIDGET_CSS = 'https://assets.calendly.com/assets/external/widget.css'
 
 export function CalendlyEmbed() {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
-  const calendlyUrl = isLabs() ? LABS_CALENDLY_URL : PERSONAL_CALENDLY_URL
 
   useEffect(() => {
     const el = ref.current
@@ -54,7 +51,7 @@ export function CalendlyEmbed() {
       {visible ? (
         <div
           className="calendly-inline-widget"
-          data-url={calendlyUrl}
+          data-url={CALENDLY_URL}
           style={{ minWidth: '320px', height: '680px' }}
         />
       ) : (
@@ -68,7 +65,7 @@ export function CalendlyEmbed() {
       <noscript>
         <p className="mt-4 text-sm">
           JavaScript required for the inline scheduler.{' '}
-          <a href={calendlyUrl} className="underline">
+          <a href={CALENDLY_URL} className="underline">
             Open scheduler in a new tab
           </a>
           .
