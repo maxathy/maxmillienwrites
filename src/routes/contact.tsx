@@ -77,12 +77,12 @@ function ContactPage() {
                   LinkedIn
                 </p>
                 <a
-                  href="https://www.linkedin.com/in/maxmillien"
+                  href="https://www.linkedin.com/in/maxmill/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-1 inline-block text-sm text-[color:var(--color-fg)]/90 underline decoration-[color:var(--color-fg)]/30 decoration-1 underline-offset-4 hover:decoration-[color:var(--color-accent)]"
                 >
-                  linkedin.com/in/maxmillien →
+                  linkedin.com/in/maxmill →
                 </a>
               </div>
 
