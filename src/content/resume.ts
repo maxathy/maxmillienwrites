@@ -4,6 +4,7 @@ export type Role = {
   start: string
   end: string
   bullets: string[]
+  current?: boolean
 }
 
 export type SkillGroup = {
@@ -120,6 +121,7 @@ export const resume: Resume = {
       title: 'Principal Engineer & Product Owner',
       start: '2025',
       end: 'Present',
+      current: true,
       bullets: [
         'Spearheaded the product development and UX design to launch an AI Biographer platform empowering users to craft and publish memoirs, achieving a 17% beta signups conversion rate.',
         'Architected and deployed an LLM-agnostic "Stateless Specialist Pattern" engine leveraging LangGraph, Neo4j, and PGVector, achieving a 40% improvement in narrative coherence over standard RAG implementations.',
@@ -135,6 +137,7 @@ export const resume: Resume = {
       title: 'Lead Consulting Architect (C2C)',
       start: '',
       end: '',
+      current: true,
       bullets: [
         'Architected Quiet Horizons TelePsychiatry, a HIPAA-compliant telehealth and patient dossier management platform utilizing GCP, Google Workspace BAA (ADC), and strict AES-256-GCM encryption for all PHI at rest via NestJS and Drizzle ORM.',
         'Engineered an ambient AI medical scribe utilizing Vertex AI (Gemini 3). Designed a stateless inference pipeline that transforms raw WebSocket audio dictations into structured clinical SOAP notes dynamically in-memory, ensuring zero draft-state database writes to preserve strictly immutable medical audit trails.',

@@ -17,8 +17,8 @@ const JSONLD_ID = 'resume-jsonld'
 const PRINT_STYLE_ID = 'resume-print-styles'
 
 function ResumePage() {
-  const currentRoles = resume.experience.filter((r) => r.start || r.end)
-  const previousRoles = resume.experience.filter((r) => !r.start && !r.end)
+  const currentRoles = resume.experience.filter((r) => r.current)
+  const previousRoles = resume.experience.filter((r) => !r.current)
 
   useEffect(() => {
     const jsonld = document.createElement('script')
