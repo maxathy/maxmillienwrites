@@ -20,7 +20,7 @@ export function ContactForm() {
     formState: { errors, isValid },
     reset,
   } = useForm<FormValues>({
-    mode: 'onBlur',
+    mode: 'onTouched',
     defaultValues: { name: '', email: '', company: '', message: '' },
   })
 
@@ -65,7 +65,7 @@ export function ContactForm() {
       <div
         role="status"
         aria-live="polite"
-        className="rounded-[var(--radius-md)] border border-[color:var(--color-accent)]/40 bg-[color:var(--color-accent)]/5 p-[var(--space-4)]"
+        className="fade-slide-in rounded-[var(--radius-md)] border border-[color:var(--color-accent)]/40 bg-[color:var(--color-accent)]/5 p-[var(--space-4)]"
       >
         <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[color:var(--color-accent)]">
           Message sent
@@ -159,7 +159,7 @@ export function ContactForm() {
       {status === 'error' && errorMessage && (
         <div
           role="alert"
-          className="rounded-[var(--radius-md)] border border-red-500/40 bg-red-500/10 p-[var(--space-3)] text-sm text-red-200"
+          className="fade-slide-in rounded-[var(--radius-md)] border border-red-500/40 bg-red-500/10 p-[var(--space-3)] text-sm text-red-200"
         >
           {errorMessage}
         </div>
@@ -168,9 +168,19 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={!isValid || status === 'submitting'}
-        className="inline-flex w-fit items-center rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[color:var(--color-bg)] transition-opacity disabled:opacity-40"
+        className="inline-flex w-fit items-center gap-2 rounded-[var(--radius-pill)] bg-[color:var(--color-accent)] px-5 py-2.5 text-sm font-semibold text-[color:var(--color-bg)] transition-all duration-150 hover:bg-[color:var(--color-accent)]/90 hover:-translate-y-px active:translate-y-0 disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:bg-[color:var(--color-accent)]"
       >
-        {status === 'submitting' ? 'Sending…' : 'Send →'}
+        {status === 'submitting' ? (
+          <>
+            <span
+              aria-hidden="true"
+              className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-[color:var(--color-bg)]/30 border-t-[color:var(--color-bg)]"
+            />
+            Sending…
+          </>
+        ) : (
+          'Send →'
+        )}
       </button>
     </form>
   )
@@ -199,9 +209,9 @@ function Field({
       </label>
       {children}
       {error ? (
-        <p className="text-xs text-red-300">{error}</p>
+        <p className="text-xs text-red-300 transition-colors duration-150">{error}</p>
       ) : hint ? (
-        <p className="text-xs text-[color:var(--color-fg)]/50">{hint}</p>
+        <p className="text-xs text-[color:var(--color-fg)]/50 transition-colors duration-150">{hint}</p>
       ) : null}
     </div>
   )
@@ -211,7 +221,11 @@ function inputClass(hasError: boolean) {
   return [
     'w-full rounded-[var(--radius-md)] border bg-white/[0.02] px-3 py-2 text-[color:var(--color-fg)]',
     'placeholder:text-[color:var(--color-fg)]/30',
-    'focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent)]/60',
-    hasError ? 'border-red-500/60' : 'border-white/10',
+    'transition-colors duration-150',
+    'hover:bg-white/[0.04]',
+    'focus:outline-none focus:ring-2 focus:ring-[color:var(--color-accent)]/60 focus:border-[color:var(--color-accent)]/40',
+    hasError
+      ? 'border-red-500/60 hover:border-red-500/80'
+      : 'border-white/10 hover:border-white/25',
   ].join(' ')
 }

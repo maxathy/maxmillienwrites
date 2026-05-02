@@ -1,9 +1,10 @@
 import { Link } from '@tanstack/react-router'
 import { Container } from '../ui/Container'
-import { isLabs } from '../../lib/tenant'
+import { isLabs, getLinkedInUrl } from '../../lib/tenant'
 
 export function Footer() {
   const labs = isLabs()
+  const linkedInUrl = getLinkedInUrl()
   return (
     <footer className="mt-[var(--space-16)] border-t border-white/5 bg-[color:var(--color-bg)] py-[var(--space-12)] text-sm text-[color:var(--color-fg)]/75">
       <Container>
@@ -29,7 +30,7 @@ export function Footer() {
               <li><a href="https://puretome.com" className="hover:text-[color:var(--color-fg)]" target="_blank" rel="noreferrer">PureTome</a></li>
               <li><a href="https://blog.puretome.com" className="hover:text-[color:var(--color-fg)]" target="_blank" rel="noreferrer">Writing</a></li>
               <li><a href="https://github.com/maxathy" className="hover:text-[color:var(--color-fg)]" target="_blank" rel="noreferrer">GitHub</a></li>
-              <li><a href="https://www.linkedin.com/in/maxmill/" className="hover:text-[color:var(--color-fg)]" target="_blank" rel="noreferrer">LinkedIn</a></li>
+              <li><a href={linkedInUrl} className="hover:text-[color:var(--color-fg)]" target="_blank" rel="noreferrer">LinkedIn</a></li>
             </ul>
           </div>
 
@@ -47,7 +48,7 @@ export function Footer() {
 
         <div className="mt-[var(--space-8)] flex items-center gap-5" aria-label="Social">
           <a href="https://github.com/maxathy" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-[color:var(--color-muted)] hover:text-[color:var(--color-fg)]">GitHub</a>
-          <a href="https://www.linkedin.com/in/maxmill/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-[color:var(--color-muted)] hover:text-[color:var(--color-fg)]">LinkedIn</a>
+          <a href={linkedInUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-[color:var(--color-muted)] hover:text-[color:var(--color-fg)]">LinkedIn</a>
           <a href="https://blog.puretome.com" target="_blank" rel="noreferrer" aria-label="Medium" className="text-[color:var(--color-muted)] hover:text-[color:var(--color-fg)]">Medium</a>
         </div>
 

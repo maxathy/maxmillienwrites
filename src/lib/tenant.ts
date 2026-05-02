@@ -11,6 +11,11 @@ export interface TenantMeta {
 
 const LABS_HOSTNAME = 'labs.puretome.com'
 
+const PERSONAL_LINKEDIN_URL = 'https://www.linkedin.com/in/maxmill/'
+const LABS_LINKEDIN_URL = 'https://www.linkedin.com/company/puretome-labs/'
+const PERSONAL_LINKEDIN_LABEL = 'linkedin.com/in/maxmill'
+const LABS_LINKEDIN_LABEL = 'linkedin.com/company/puretome-labs'
+
 export function isLabs(): boolean {
   if (typeof window === 'undefined') return false
   return window.location.hostname.includes(LABS_HOSTNAME)
@@ -18,6 +23,14 @@ export function isLabs(): boolean {
 
 export function getTenant(): Tenant {
   return isLabs() ? 'labs' : 'personal'
+}
+
+export function getLinkedInUrl(): string {
+  return isLabs() ? LABS_LINKEDIN_URL : PERSONAL_LINKEDIN_URL
+}
+
+export function getLinkedInLabel(): string {
+  return isLabs() ? LABS_LINKEDIN_LABEL : PERSONAL_LINKEDIN_LABEL
 }
 
 const PERSONAL_META: TenantMeta = {
