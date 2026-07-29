@@ -5,6 +5,13 @@ export type Role = {
   end: string
   bullets: string[]
   current?: boolean
+  /**
+   * Roles are dated here once, in one place, even though the public page
+   * renders the curated dateless view. Set false to keep a short contract
+   * stint out of that curated view. The dated chronology used for job
+   * submissions lives in the Drive doc, not here.
+   */
+  inHighlights?: boolean
 }
 
 export type SkillGroup = {
@@ -22,6 +29,7 @@ export type Education = {
 export type OpenSourceProject = {
   name: string
   href: string
+  blurb: string
 }
 
 export type OpenSource = {
@@ -131,10 +139,26 @@ export const resume: Resume = {
     contributionsPrefix: 'merged fixes to',
     contributionRepos: ['Angular (core)', 'claude-mem'],
     projects: [
-      { name: 'secure-data-vault', href: 'https://github.com/maxmillienjr/secure-data-vault' },
-      { name: 'agent-native-monorepo', href: 'https://github.com/maxmillienjr/agent-native-monorepo' },
-      { name: 'realtime-voice-infra', href: 'https://github.com/maxmillienjr/realtime-voice-infra' },
-      { name: 'royalty-lookout', href: 'https://github.com/maxmillienjr/royalty-lookout' },
+      {
+        name: 'realtime-voice-infra',
+        href: 'https://github.com/maxmillienjr/realtime-voice-infra',
+        blurb: 'voice-agent transport layer: AudioWorklet capture, backpressure-aware streaming',
+      },
+      {
+        name: 'agent-native-monorepo',
+        href: 'https://github.com/maxmillienjr/agent-native-monorepo',
+        blurb: 'stateful LangGraph agent chassis with a three-tier memory architecture',
+      },
+      {
+        name: 'secure-data-vault',
+        href: 'https://github.com/maxmillienjr/secure-data-vault',
+        blurb: 'regulated-data reference architecture: envelope encryption, tamper-evident audit trails',
+      },
+      {
+        name: 'royalty-lookout',
+        href: 'https://github.com/maxmillienjr/royalty-lookout',
+        blurb: 'normalizes KDP, IngramSpark, and StreetLib royalty exports into one ledger',
+      },
     ],
   },
   experience: [
@@ -147,7 +171,7 @@ export const resume: Resume = {
       bullets: [
         'Shipped a HIPAA-compliant telehealth and patient dossier management platform utilizing GCP, Google Workspace BAA (ADC), and strict AES-256-GCM encryption for all PHI at rest via NestJS and Drizzle ORM.',
         'Engineered an ambient AI medical scribe utilizing Vertex AI (Gemini 3). Designed a stateless inference pipeline that transforms raw WebSocket audio dictations into structured psychiatric notes dynamically in-memory, ensuring zero draft-state database writes to preserve strictly immutable medical audit trails.',
-        'Developed a highly reactive clinical workspace using Angular 21 and Spartan UI, featuring a real-time secure dictation pipeline streaming live audio to Google Speech-to-Text, reducing provider charting time by synthesizing complex psychiatric evaluations in seconds.',
+        'Developed a highly reactive clinical workspace using Angular 21 and Spartan UI, featuring a real-time secure dictation pipeline that streams live browser audio over WebSockets to Google Speech-to-Text, reducing provider charting time by synthesizing complex psychiatric evaluations in seconds.',
       ],
     },
     {
@@ -167,10 +191,22 @@ export const resume: Resume = {
       ],
     },
     {
+      company: 'Altlending',
+      title: 'Senior Consultant (W2 contract)',
+      start: '2018',
+      end: '2019',
+      inHighlights: false,
+      bullets: [
+        'Developed an institutional crypto-lending platform issuing USD loans collateralized by digital assets (BTC/ETH).',
+        'Migrated a Node.js/MongoDB prototype backend to .NET Core / PostgreSQL and refactored the React front end.',
+        'Stood up AWS CI/CD (CodeStar) and established front-end patterns for long-term maintainability.',
+      ],
+    },
+    {
       company: 'SBE Vision',
       title: 'Engineering Lead',
-      start: '',
-      end: '',
+      start: '2016',
+      end: '2018',
       bullets: [
         'Led a team of 11 developers (across 3 time zones), directed agile processes, and architected microservice infrastructure across GKE and on-prem Kubernetes clusters, integrating GitLab CI/Nexus pipelines.',
         'Designed and developed a modular Angular UI toolkit leveraging Material Design/Tachyons/D3.js, standardizing UX and cutting design-to-development time. The service layer consisted of 10+ microservices built with Spring Boot, Nest.js, and Koa.js, along with Postgres for persistence.',
@@ -180,13 +216,24 @@ export const resume: Resume = {
       ],
     },
     {
+      company: 'Intac International',
+      title: 'Senior Software Engineer (W2 contract)',
+      start: '2015',
+      end: '2016',
+      inHighlights: false,
+      bullets: [
+        'Created a large, data-driven toolkit of reusable/themeable web components for WintacOnline, a cross-device SaaS for mobile CRM, booking, dispatching, and billing automation; segmented the core app into market-specific interfaces: HVAC, Plumbing, Cleaning (EmberJS, Ruby on Rails, AWS, CircleCI, RDS).',
+        'Authored the majority of the UI framework and established code-review standards while mentoring the team.',
+      ],
+    },
+    {
       company: 'Verizon',
       title: 'Senior Software Engineer',
-      start: '',
-      end: '',
+      start: '2014',
+      end: '2015',
       bullets: [
         'Built web apps and RESTful web services to manage enterprise private cloud organizations and their associated accounts, virtual machines, storage, firewalls, billing, and usage (Dropwizard, Swagger, RabbitMQ, Angular, Express, Nginx, Postgres, CentOS).',
-        'Championed best practices for Node.js, Angular, and Docker adoption, standardizing front-end workflows and improving developer experience.',
+        'Championed best practices for Node.js, Angular, and Docker adoption, and standardized front-end workflows across teams.',
         'Designed cross-platform Vagrant/Docker dev clusters that reduced environment setup time from 2 days to under 2 hours, accelerating team onboarding and CI pipeline readiness.',
         'Built an automated OpenShift STI deployment pipeline for containerized microservices, enabling zero-downtime releases and reducing deployment errors.',
       ],
@@ -194,20 +241,20 @@ export const resume: Resume = {
     {
       company: 'G4S',
       title: 'Senior Software Engineer',
-      start: '',
-      end: '',
+      start: '2012',
+      end: '2014',
       bullets: [
         'Developed a configurable survey and incident reporting tool (Knockout.js, RavenDB, ASP.NET MVC) deployed across 17K+ security systems, improving data collection efficiency and UX consistency.',
-        'Built SQL-to-RavenDB migration utilities and Excel importers supporting 100K+ system records, enabling seamless legacy-to-modern data transition.',
+        'Built SQL-to-RavenDB migration utilities and Excel importers supporting 100K+ system records.',
         'Enhanced Card Access Control app with 10+ new features and performance optimizations, reducing load times and improving system uptime.',
         'Developed recruitment workflow module (Angular, C#, RabbitMQ, Azure), implementing CQRS architecture, improving request processing speed, and reducing code complexity.',
       ],
     },
     {
       company: 'Partners Health',
-      title: 'Senior Software Engineer (contract)',
-      start: '',
-      end: '',
+      title: 'Senior Software Engineer (W2 contract)',
+      start: '2011',
+      end: '2012',
       bullets: [
         'Developed applications for the Acute Care Documentation team to provide real-time electronic medical record solutions, thereby replacing paper flow sheets, assessments, and clinical notes.',
         'Implemented a cost analysis tool for the Imaging Finance department that is used for tracking the usage of radiology resources owned by Massachusetts General Hospital.',
@@ -218,6 +265,8 @@ export const resume: Resume = {
     {
       institution: 'Boston University',
       degree: 'Bachelor of Science, Electrical Engineering',
+      start: '2003',
+      end: '2007',
     },
   ],
 }
