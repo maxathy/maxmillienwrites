@@ -164,7 +164,7 @@ export const resume: Resume = {
   experience: [
     {
       company: 'Quiet Horizon PLLC',
-      title: 'Principal Architect (C2C contract)',
+      title: 'Principal Architect',
       start: '2026',
       end: 'Present',
       current: true,
@@ -205,7 +205,7 @@ export const resume: Resume = {
     },
     {
       company: 'Intac International',
-      title: 'Senior Software Engineer (W2 contract)',
+      title: 'Senior Software Engineer',
       start: '2015',
       end: '2016',
       inHighlights: false,
@@ -239,8 +239,8 @@ export const resume: Resume = {
       ],
     },
     {
-      company: 'Partners Health',
-      title: 'Senior Software Engineer (W2 contract)',
+      company: 'Partners Healthcare',
+      title: 'Programmer/Analyst',
       start: '2011',
       end: '2012',
       bullets: [
