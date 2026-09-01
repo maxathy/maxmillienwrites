@@ -101,10 +101,10 @@ export const stackNodes: StackNode[] = [
     note: 'Source of truth for everything transactional. JSONB for flexible fields, pgvector for embeddings, row-level security for tenant isolation.',
   },
   {
-    id: 'redis-bull',
-    name: 'Redis/Bull',
+    id: 'redis',
+    name: 'Redis',
     group: 'backend',
-    note: 'In-process job queues for bounded workloads: delayed jobs, priority lanes, and a dashboard that tells the on-call what the queue is actually doing.',
+    note: 'ioredis-backed cache and distributed lock layer in front of the retrieval path: memoized embeddings and answers, plus leases that keep two workers from rebuilding the same index.',
   },
   {
     id: 'qstash',
@@ -136,7 +136,7 @@ export const stackNodes: StackNode[] = [
     id: 'spartan-ui',
     name: 'Spartan UI',
     group: 'frontend',
-    note: 'Headless component primitives for Angular: the shadcn of the Angular world, so design-system tokens flow from Figma to Tailwind to runtime without a component library fighting back.',
+    note: 'Headless component primitives for Angular: the shadcn of the Angular world, so design tokens live in the stylesheet and flow straight to runtime without a component library fighting back.',
   },
   {
     id: 'tailwind-v4',
@@ -229,7 +229,7 @@ export const stackEdges: StackEdge[] = [
   { source: 'langgraph', target: 'gemini', label: 'structured extraction' },
   { source: 'nestjs', target: 'drizzle', label: 'typed data layer' },
   { source: 'drizzle', target: 'postgres', label: 'schema + migrations' },
-  { source: 'nestjs', target: 'redis-bull', label: 'job queue' },
+  { source: 'nestjs', target: 'redis', label: 'cache + locks' },
   { source: 'nestjs', target: 'qstash', label: 'durable webhooks' },
   { source: 'angular-21', target: 'spartan-ui', label: 'component layer' },
   { source: 'spartan-ui', target: 'tailwind-v4', label: 'styling' },
