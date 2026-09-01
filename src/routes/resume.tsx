@@ -21,7 +21,9 @@ const PRINT_STYLE_ID = 'resume-print-styles'
 
 function ResumePage() {
   const currentRoles = resume.experience.filter((r) => r.current)
-  const previousRoles = resume.experience.filter((r) => !r.current)
+  const previousRoles = resume.experience.filter(
+    (r) => !r.current && r.inHighlights !== false,
+  )
 
   useEffect(() => {
     const jsonld = document.createElement('script')
@@ -114,29 +116,30 @@ function ResumePage() {
                   </span>
                 ))}
               </p>
-              <p className="text-[color:var(--color-fg)]/80">
-                <span className="font-semibold text-[color:var(--color-fg)]">Projects:</span>{' '}
-                {resume.openSource.projects.map((p, i) => (
-                  <span key={p.name}>
-                    {i > 0 && <span className="mx-2 text-[color:var(--color-fg)]/50">•</span>}
+              <p className="font-semibold text-[color:var(--color-fg)]">Projects:</p>
+              <ul className="flex flex-col gap-1">
+                {resume.openSource.projects.map((p) => (
+                  <li key={p.name} className="text-[color:var(--color-fg)]/80">
                     <a
                       href={p.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium underline-offset-4 hover:underline"
+                      className="font-medium text-[color:var(--color-fg)] underline-offset-4 hover:underline"
                     >
                       {p.name}
                     </a>
-                  </span>
+                    <span className="text-[color:var(--color-fg)]/50"> – </span>
+                    {p.blurb}
+                  </li>
                 ))}
-              </p>
+              </ul>
             </div>
           </Section>
 
           <Section title="Experience">
             <div className="flex flex-col gap-[var(--space-8)]">
               {currentRoles.map((role) => (
-                <RoleBlock key={`${role.company}-${role.title}`} role={role} />
+                <RoleBlock key={`${role.company}-${role.title}`} role={role} showDates />
               ))}
 
               <div className="mt-[var(--space-4)] border-t border-white/10 pt-[var(--space-6)]">
@@ -164,11 +167,7 @@ function ResumePage() {
                   <p className="text-lg">{ed.institution}</p>
                   <p className="text-[color:var(--color-fg)]/70">{ed.degree}</p>
                 </div>
-                {(ed.start || ed.end) && (
-                  <p className="font-mono text-sm text-[color:var(--color-fg)]/60">
-                    {ed.start} – {ed.end}
-                  </p>
-                )}
+                {/* Education dates live in resume.ts but stay off the public page. */}
               </div>
             ))}
           </Section>
@@ -189,7 +188,10 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   )
 }
 
-function RoleBlock({ role }: { role: Role }) {
+// The page is the curated dateless presentation: only current roles show dates.
+// resume.ts still carries the true dates for every role; they just aren't printed
+// here. The dated chronology lives in the Drive doc used for submissions.
+function RoleBlock({ role, showDates = false }: { role: Role; showDates?: boolean }) {
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
@@ -198,7 +200,7 @@ function RoleBlock({ role }: { role: Role }) {
           <span className="text-[color:var(--color-fg)]/50"> · </span>
           <span className="text-[color:var(--color-fg)]/90">{role.title}</span>
         </h3>
-        {(role.start || role.end) && (
+        {showDates && (role.start || role.end) && (
           <span className="font-mono text-sm text-[color:var(--color-fg)]/60">
             {role.start} {role.end && `– ${role.end}`}
           </span>
@@ -259,9 +261,11 @@ const PRINT_STYLES = `
     --space-8: 7pt;
     --space-10: 9pt;
     --space-16: 0pt;
-    padding: 10mm 14mm 6mm !important;
+    /* Density tuned so the page prints to 2 sheets; the Open Source blurbs
+       cost ~4 lines. Re-check the page count after editing resume.ts. */
+    padding: 10mm 14mm 5mm !important;
     font-size: 10pt;
-    line-height: 1.35;
+    line-height: 1.28;
     color: #111;
   }
   .resume-page section:last-child { margin-bottom: 0 !important; }
