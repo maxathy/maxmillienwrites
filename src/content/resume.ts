@@ -163,24 +163,15 @@ export const resume: Resume = {
   },
   experience: [
     {
-      company: 'Quiet Horizon PLLC',
-      title: 'Principal Architect',
-      start: '2026',
-      end: 'Present',
-      current: true,
-      bullets: [
-        'Shipped a HIPAA-compliant telehealth and patient dossier management platform utilizing GCP, Google Workspace BAA (ADC), and strict AES-256-GCM encryption for all PHI at rest via NestJS and Drizzle ORM.',
-        'Engineered an ambient AI medical scribe utilizing Vertex AI (Gemini 3). Designed a stateless inference pipeline that transforms raw WebSocket audio dictations into structured psychiatric notes dynamically in-memory, ensuring zero draft-state database writes to preserve strictly immutable medical audit trails.',
-        'Developed a highly reactive clinical workspace using Angular 21 and Spartan UI, featuring a real-time secure dictation pipeline that streams live browser audio over WebSockets to Google Speech-to-Text, reducing provider charting time by synthesizing complex psychiatric evaluations in seconds.',
-      ],
-    },
-    {
       company: 'PureTome',
       title: 'Principal Engineer & Product Owner',
       start: '2025',
       end: 'Present',
       current: true,
       bullets: [
+        'Shipped a HIPAA-compliant telehealth and patient dossier management platform for a psychiatric practice client (Quiet Horizon PLLC), utilizing GCP, Google Workspace BAA (ADC), and strict AES-256-GCM encryption for all PHI at rest via NestJS and Drizzle ORM.',
+        'Engineered an ambient AI medical scribe utilizing Vertex AI (Gemini 3). Designed a stateless inference pipeline that transforms raw WebSocket audio dictations into structured psychiatric notes dynamically in-memory, ensuring zero draft-state database writes to preserve strictly immutable medical audit trails.',
+        'Developed a highly reactive clinical workspace using Angular 21 and Spartan UI, featuring a real-time secure dictation pipeline that streams live browser audio over WebSockets to Google Speech-to-Text, reducing provider charting time by synthesizing complex psychiatric evaluations in seconds.',
         'Spearheaded the product development and UX design to launch an AI Biographer platform, empowering users to craft, publish, and distribute ebook/paperback memoirs and biographies.',
         'Built and deployed an LLM-agnostic stateless engine leveraging LangGraph, Neo4j, and PGVector, significantly improving large narrative coherence (500k words) over standard RAG implementations.',
         'Engineered a high-performance monorepo integrating a React 19 frontend with Node.js/NestJS microservices.',
